@@ -1,0 +1,7 @@
+STORABLE CLASS /service/nextai {
+READ_ACCESS = "BrandLineage";
+WRITE_ACCESS = "BrandLineage";
+DESCR = "NextAI service class for Group 03. Tracks AI agent token consumption.";
+IS_PARTITIONED = "0";
+EVENT_TYPE = "NONE";
+}

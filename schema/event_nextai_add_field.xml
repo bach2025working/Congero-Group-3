@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BillingConfiguration>
+  <StorableClass name="/event/billing/usage/nextai" baseClass="/event/billing/usage">
+    <Field name="PIN_FLD_QUANTITY" type="DECIMAL" encryptable="false" auditable="false"/>
+  </StorableClass>
+</BillingConfiguration>

@@ -1,0 +1,45 @@
+0 PIN_FLD_POID           POID [0] 0.0.0.1 /account 367997 0
+0 PIN_FLD_PROGRAM_NAME    STR [0] "testnap"
+0 PIN_FLD_START_T      TSTAMP [0] (0) <null>
+0 PIN_FLD_END_T        TSTAMP [0] (0) <null>
+0 PIN_FLD_SERVICE_OBJ    POID [0] 0.0.0.1 /service/nextai 363197 0
+0 PIN_FLD_BILLINFO_OBJ   POID [0] 0.0.0.1 /billinfo 366461 0
+0 PIN_FLD_DEAL_INFO    SUBSTRUCT [0]
+1     PIN_FLD_POID           POID [0] 0.0.0.1 /deal 371444 0
+1     PIN_FLD_NAME            STR [0] "NAI-G03-PAYG-Deal"
+1     PIN_FLD_START_T      TSTAMP [0] (0) <null>
+1     PIN_FLD_END_T        TSTAMP [0] (0) <null>
+1     PIN_FLD_FLAGS           INT [0] 0
+1     PIN_FLD_CREDIT_LIMIT_FLAGS    INT [0] 64
+1     PIN_FLD_PLAN_OBJ       POID [0] 0.0.0.1 /plan 372468 0
+1     PIN_FLD_PRODUCTS      ARRAY [0]
+2         PIN_FLD_PRODUCT_OBJ    POID [0] 0.0.0.1 /product 372596 0
+2         PIN_FLD_NAME            STR [0] "NAI-G03-PAYG-Product"
+2         PIN_FLD_DESCR           STR [0] "NextAI Group 03 Pay-as-you-go"
+2         PIN_FLD_STATUS         ENUM [0] 1
+2         PIN_FLD_STATUS_FLAGS    INT [0] 0
+2         PIN_FLD_FLAGS           INT [0] 0
+2         PIN_FLD_QUANTITY     DECIMAL [0] 1
+2         PIN_FLD_MODE           ENUM [0] 0
+2         PIN_FLD_RENEWAL_MODE    INT [0] 0
+2         PIN_FLD_PURCHASE_DISCOUNT DECIMAL [0] 0
+2         PIN_FLD_CYCLE_DISCOUNT DECIMAL [0] 0
+2         PIN_FLD_USAGE_DISCOUNT DECIMAL [0] 0
+2         PIN_FLD_BASE_PRODUCT_OBJ   POID [0] 0.0.0.0  0 0
+2         PIN_FLD_PLAN_OBJ       POID [0] 0.0.0.1 /plan 372468 0
+2         PIN_FLD_OWN_MIN      DECIMAL [0] NULL
+2         PIN_FLD_OWN_MAX      DECIMAL [0] NULL
+2         PIN_FLD_GRACE_PERIOD_OFFSET    INT [0] 0
+2         PIN_FLD_GRACE_PERIOD_UNIT    INT [0] 0
+2         PIN_FLD_PURCHASE_START_DETAILS    INT [0] 1
+2         PIN_FLD_PURCHASE_END_DETAILS    INT [0] 2
+2         PIN_FLD_CYCLE_START_DETAILS    INT [0] 1
+2         PIN_FLD_CYCLE_END_DETAILS    INT [0] 2
+2         PIN_FLD_USAGE_START_DETAILS    INT [0] 1
+2         PIN_FLD_USAGE_END_DETAILS    INT [0] 2
+2         PIN_FLD_PURCHASE_START_T TSTAMP [0] (0) <null>
+2         PIN_FLD_PURCHASE_END_T TSTAMP [0] (0) <null>
+2         PIN_FLD_CYCLE_START_T TSTAMP [0] (0) <null>
+2         PIN_FLD_CYCLE_END_T  TSTAMP [0] (0) <null>
+2         PIN_FLD_USAGE_START_T TSTAMP [0] (0) <null>
+2         PIN_FLD_USAGE_END_T  TSTAMP [0] (0) <null>

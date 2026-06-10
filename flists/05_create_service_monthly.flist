@@ -1,0 +1,10 @@
+0 PIN_FLD_POID           POID [0] 0.0.0.1 /service/nextai -1 0
+0 PIN_FLD_PROGRAM_NAME    STR [0] "testnap"
+0 PIN_FLD_ACCOUNT_OBJ    POID [0] 0.0.0.1 /account 371916 0
+0 PIN_FLD_SERVICE_ID      STR [0] ""
+0 PIN_FLD_LOGIN           STR [0] "monthly@nextai.g03"
+0 PIN_FLD_PASSWD_CLEAR    STR [0] "Pin1234!"
+0 PIN_FLD_PASSWD_STATUS   ENUM [0] 0
+0 PIN_FLD_START_T      TSTAMP [0] (0) <null>
+0 PIN_FLD_END_T        TSTAMP [0] (0) <null>
+0 PIN_FLD_BAL_GRP_OBJ    POID [0] 0.0.0.1 /balance_group 370124 0

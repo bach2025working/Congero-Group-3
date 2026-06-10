@@ -1,0 +1,13 @@
+STORABLE CLASS /event/billing/usage {
+  READ_ACCESS = "BrandLineage";
+  WRITE_ACCESS = "BrandLineage";
+  DESCR = "Intermediate usage event container layer.";
+  IS_PARTITIONED = "0";
+}
+STORABLE CLASS /event/billing/usage/nextai {
+  READ_ACCESS = "BrandLineage";
+  WRITE_ACCESS = "BrandLineage";
+  DESCR = "NextAI token usage event for Group 03.";
+  IS_PARTITIONED = "1";
+  FIELD ( PIN_FLD_QUANTITY , PIN_FLDT_DECIMAL , SINGLE , 0 , "Number of tokens consumed in this usage event." );
+}
