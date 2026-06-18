@@ -145,7 +145,7 @@ op_nai_get_available_res(
          * strstr(word, pattern) returns a pointer to the first letter of pattern inside word,
          * granted pattern exists in word, else return NULL
          */
-        char * pattern = "service/nextaig3g3";
+        char * pattern = "service/nextaig3";
         char * is_nextaig3 = NULL;
         char *poid_str = NULL;
         int32 len = 0; // To store the length of the string representation
