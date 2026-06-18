@@ -20,7 +20,7 @@ static const char Sccs_id[] = "@(#)% %";
 #endif
 
 /*******************************************************************
- * Contains the NAI_OP_act_rate operation.
+ * Contains the NAI3_OP_ACT_RATE operation.
  *******************************************************************/
 
 #include <stdio.h>
@@ -88,7 +88,7 @@ fm_nai_act_rate(
 
 
 /*******************************************************************
- * Main routine for the NAI_OP_act_rate operation.
+ * Main routine for the NAI3_OP_ACT_RATE operation.
  *******************************************************************/
 void
 op_nai_act_rate(
@@ -114,7 +114,7 @@ op_nai_act_rate(
         /***********************************************************
          * Insanity check.
          ***********************************************************/
-        if (opcode != NAI_OP_ACT_RATE) {
+        if (opcode != NAI3_OP_ACT_RATE) {
                 pin_set_err(ebufp, PIN_ERRLOC_FM,
                         PIN_ERRCLASS_SYSTEM_DETERMINATE,
                         PIN_ERR_BAD_OPCODE, 0, 0, opcode);
