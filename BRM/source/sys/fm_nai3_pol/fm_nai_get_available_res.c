@@ -21,7 +21,7 @@ static const char Sccs_id[] = "@(#)% %";
 #endif
 
 /*******************************************************************
- * Contains the NAI_OP_get_available_res operation.
+ * Contains the NAI3_OP_GET_AVAILABLE_RES operation.
  *******************************************************************/
 
 #include <stdio.h>
@@ -33,7 +33,7 @@ static const char Sccs_id[] = "@(#)% %";
 
 #define FILE_LOGNAME "fm_nai_get_available_res.c(1)"
 
-#include "ops/nai_cust_ops.h"
+#include "ops/naig3_custom_ops.h"
 #include "cm_fm.h"
 #include "pin_errs.h"
 
@@ -75,7 +75,7 @@ fm_nai_get_available_res(
 
 
 /*******************************************************************
- * Main routine for the NAI_OP_get_available_res operation.
+ * Main routine for the NAI3_OP_GET_AVAILABLE_RES operation.
  *******************************************************************/
 void
 op_nai_get_available_res(
@@ -101,7 +101,7 @@ op_nai_get_available_res(
         /***********************************************************
          * Insanity check.
          ***********************************************************/
-        if (opcode != NAI_OP_GET_AVAILABLE_RES) {
+        if (opcode != NAI3_OP_GET_AVAILABLE_RES) {
                 pin_set_err(ebufp, PIN_ERRLOC_FM,
                         PIN_ERRCLASS_SYSTEM_DETERMINATE,
                         PIN_ERR_BAD_OPCODE, 0, 0, opcode);
