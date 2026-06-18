@@ -20,9 +20,9 @@ static const char Sccs_id[] = "@(#)$Id: fm_nai_config.c /cgbubrm_7.5.0.portalbas
 
 #define FILE_LOGNAME "fm_nai_config.c"
 
-PIN_EXPORT void * fm_nai_config_func();
+PIN_EXPORT void * fm_nai3_config_func();
 
-struct cm_fm_config fm_nai_config[] = {
+struct cm_fm_config fm_nai3_config[] = {
 { NAI3_OP_COMMIT_CUSTOMER, "op_nai3_commit_customer" },
 { NAI3_OP_GET_AVAILABLE_RES, "op_nai3_get_available_res" },
 { NAI3_OP_ACT_RATE, "op_nai3_act_rate" },
@@ -30,7 +30,7 @@ struct cm_fm_config fm_nai_config[] = {
 };
 
 void *
-fm_nai_config_func()
+fm_nai3_config_func()
 {
-  return ((void *) (fm_nai_config));
+  return ((void *) (fm_nai3_config));
 }
