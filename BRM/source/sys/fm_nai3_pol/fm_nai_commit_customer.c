@@ -585,6 +585,8 @@ fm_nai_commit_customer(
         int32 businesstype = 1;
         PIN_FLIST_FLD_SET(acct_info, PIN_FLD_BUSINESS_TYPE, &businesstype, ebufp);
 
+        PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_ERROR, "cust_flist before COMMIT", cust_flist); // debug log
+
         pin_flist_t * pcm_return_flist = PIN_FLIST_CREATE(ebufp);
         PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "CALLING PCM_OP_CUST_COMMIT_CUSTOMER");
         PCM_OP(ctxp, PCM_OP_CUST_COMMIT_CUSTOMER, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
