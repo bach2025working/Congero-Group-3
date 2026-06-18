@@ -20,7 +20,7 @@ static const char Sccs_id[] = "@(#)% %";
 #endif
 
 /*******************************************************************
- * Contains the NAI_OP_COMMIT_CUSTOMER operation.
+ * Contains the NAI3_OP_COMMIT_CUSTOMER operation.
  *******************************************************************/
 
 #include <stdio.h>
@@ -31,7 +31,7 @@ static const char Sccs_id[] = "@(#)% %";
 
 #define FILE_LOGNAME "fm_nai_commit_customer.c(1)"
 
-#include "ops/nai_cust_ops.h"
+#include "ops/naig3_custom_ops.h"
 #include "cm_fm.h"
 #include "pin_errs.h"
 
@@ -95,7 +95,7 @@ fm_nai_commit_customer(
 
 
 /*******************************************************************
- * Main routine for the NAI_OP_COMMIT_CUSTOMER operation.
+ * Main routine for the NAI3_OP_COMMIT_CUSTOMER operation.
  *******************************************************************/
 void
 op_nai_commit_customer(
@@ -121,7 +121,7 @@ op_nai_commit_customer(
         /***********************************************************
          * Insanity check.
          ***********************************************************/
-        if (opcode != NAI_OP_COMMIT_CUSTOMER) {
+        if (opcode != NAI3_OP_COMMIT_CUSTOMER) {
                 pin_set_err(ebufp, PIN_ERRLOC_FM,
                         PIN_ERRCLASS_SYSTEM_DETERMINATE,
                         PIN_ERR_BAD_OPCODE, 0, 0, opcode);
