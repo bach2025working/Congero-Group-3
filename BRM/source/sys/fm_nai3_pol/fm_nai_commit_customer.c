@@ -482,8 +482,15 @@ fm_nai_commit_customer(
         // 1 PIN_FLD_PASSWD_CLEAR STR [0] "MY_PW"
         PIN_FLIST_FLD_SET(services, PIN_FLD_PASSWD_CLEAR, (void *)passwd_clear, ebufp);
 
-        // 1 PIN_FLD_LOGIN STR [0] "MY_LOGIN"
+       // 1 PIN_FLD_LOGIN STR [0] "MY_LOGIN"
         PIN_FLIST_FLD_SET(services, PIN_FLD_LOGIN, (void *)login, ebufp);
+        
+        /*
+         * Do NOT populate PIN_FLD_SERVICE_NEXTAIG3 here.
+         * PCM_OP_CUST_CREATE_SERVICE drops it and then complains
+         * that field 10010 is missing.
+         * We will write it after customer creation succeeds.
+         
 
         pin_flist_t *nextai_info = PIN_FLIST_SUBSTR_ADD(services, PIN_FLD_SERVICE_NEXTAIG3, ebufp);
 
@@ -495,7 +502,7 @@ fm_nai_commit_customer(
                 model_type = 30;
         }
         
-        PIN_FLIST_FLD_SET(nextai_info, PIN_FLD_MODELTYPE_NAI3, &model_type, ebufp);
+        PIN_FLIST_FLD_SET(nextai_info, PIN_FLD_MODELTYPE_NAI3, &model_type, ebufp);*/
 
         // DEALS
         // 1 PIN_FLD_DEALS ARRAY [0]
@@ -601,39 +608,108 @@ fm_nai_commit_customer(
 
         pin_flist_t * pcm_return_flist = PIN_FLIST_CREATE(ebufp);
         PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "CALLING PCM_OP_CUST_COMMIT_CUSTOMER");
-        PCM_OP(ctxp, PCM_OP_CUST_COMMIT_CUSTOMER, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
-
+        PCM_OP(ctxp, PCM_OP_CUST_COMMIT_CUSTOMER,
+               flags, cust_flist, &pcm_return_flist, ebufp);
+        
         *r_flistpp = PIN_FLIST_CREATE(ebufp);
-
-        PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG,
-                        "op_nai_commit_customer output flist", *r_flistpp);
-
-        /*
-         * If theres an error, sends error code 1 with the message
-         * else, sends error code 0 and the poid
-         */
+        
         if (PIN_ERR_IS_ERR(ebufp)) {
-            PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "ERROR AFTER CALLING PCM COMMIT CUS");
-            PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
-                        "op_nai_read error", ebufp);
-            PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR, "fm_nai_commit_customer PCM_OP error", ebufp);
-
-            PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE, (void *)"1", ebufp);
-            PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR, (void *)"Issue with PCM_OP_CUST_COMMIT_CUSTOMER", ebufp);
+                PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
+                                "ERROR AFTER CALLING PCM COMMIT CUS");
+                PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
+                                "fm_nai_commit_customer PCM_OP error", ebufp);
+        
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE,
+                                  (void *)"1", ebufp);
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR,
+                                  (void *)"Issue with PCM_OP_CUST_COMMIT_CUSTOMER",
+                                  ebufp);
         } else {
-            PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG, "PCM_OP_CUST_COMMIT_CUSTOMER output", pcm_return_flist);
-
-            PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE, (void *)"0", ebufp);
-            PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR, (void *)"Customer committed successfully", ebufp);
-
-            poid_t *cust_poid = PIN_FLIST_FLD_GET(pcm_return_flist, PIN_FLD_POID, 0, ebufp);
+                pin_flist_t *svc = NULL;
+                pin_flist_t *wf = NULL;
+                pin_flist_t *wr = NULL;
+                pin_flist_t *svc_nextai = NULL;
+                poid_t *svc_poid = NULL;
+                pin_cookie_t svc_cookie = NULL;
+                int32 svc_elemid = 0;
+                int32 model_type = 30;
+        
+                PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG,
+                                  "PCM_OP_CUST_COMMIT_CUSTOMER output",
+                                  pcm_return_flist);
+        
+                svc = PIN_FLIST_ELEM_GET_NEXT(
+                        pcm_return_flist,
+                        PIN_FLD_SERVICES,
+                        &svc_elemid,
+                        1,
+                        &svc_cookie,
+                        ebufp);
+        
+                if (svc != NULL) {
+                        svc_poid = PIN_FLIST_FLD_GET(
+                                svc,
+                                PIN_FLD_SERVICE_OBJ,
+                                0,
+                                ebufp);
+        
+                        if (svc_poid != NULL) {
+                                wf = PIN_FLIST_CREATE(ebufp);
+        
+                                PIN_FLIST_FLD_SET(wf, PIN_FLD_POID,
+                                                  svc_poid, ebufp);
+        
+                                svc_nextai = PIN_FLIST_SUBSTR_ADD(
+                                        wf,
+                                        PIN_FLD_SERVICE_NEXTAIG3,
+                                        ebufp);
+        
+                                if (strstr(code, "O3.5") != NULL) {
+                                        model_type = 35;
+                                } else {
+                                        model_type = 30;
+                                }
+        
+                                PIN_FLIST_FLD_SET(
+                                        svc_nextai,
+                                        PIN_FLD_MODELTYPE_NAI3,
+                                        &model_type,
+                                        ebufp);
+        
+                                PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_ERROR,
+                                                  "WRITE_FLDS service_nextaig3 input",
+                                                  wf);
+        
+                                PCM_OP(ctxp, PCM_OP_WRITE_FLDS,
+                                       0, wf, &wr, ebufp);
+        
+                                PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_ERROR,
+                                                  "WRITE_FLDS service_nextaig3 output",
+                                                  wr);
+        
+                                PIN_FLIST_DESTROY_EX(&wf, NULL);
+                                PIN_FLIST_DESTROY_EX(&wr, NULL);
+                        }
+                }
+        
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE,
+                                  (void *)"0", ebufp);
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR,
+                                  (void *)"Customer committed successfully", ebufp);
+        
+                poid_t *cust_poid =
+                        PIN_FLIST_FLD_GET(pcm_return_flist,
+                                          PIN_FLD_POID, 0, ebufp);
+        
                 if (cust_poid != NULL) {
-                    PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_POID, (void *)cust_poid, ebufp);
-            } else {
-                PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_WARNING, "No POID returned from PCM_OP_CUST_COMMIT_CUSTOMER");
-            }
+                        PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_POID,
+                                          (void *)cust_poid, ebufp);
+                } else {
+                        PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_WARNING,
+                                        "No POID returned from PCM_OP_CUST_COMMIT_CUSTOMER");
+                }
         }
-
+        
         PIN_FLIST_DESTROY_EX(&cust_flist, NULL);
         PIN_FLIST_DESTROY_EX(&pcm_return_flist, NULL);
         return;
