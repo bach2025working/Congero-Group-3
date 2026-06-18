@@ -487,15 +487,15 @@ fm_nai_commit_customer(
 
         pin_flist_t *nextai_info = PIN_FLIST_SUBSTR_ADD(services, PIN_FLD_SERVICE_NEXTAIG3, ebufp);
 
-        char *model_type = NULL;
+        int32 model_type = 30;
 
         if (strstr(code, "O3.5") != NULL) {
-                model_type = "Odyssey3.5";
+                model_type = 35;
         } else {
-                model_type = "Odyssey3";
+                model_type = 30;
         }
-
-        PIN_FLIST_FLD_SET(nextai_info, PIN_FLD_MODELTYPE_NAI3, (void *)model_type, ebufp);
+        
+        PIN_FLIST_FLD_SET(nextai_info, PIN_FLD_MODELTYPE_NAI3, &model_type, ebufp);
 
         // DEALS
         // 1 PIN_FLD_DEALS ARRAY [0]
