@@ -475,8 +475,8 @@ fm_nai_commit_customer(
         // 0 PIN_FLD_services ARRAY [0]
         pin_flist_t * services = PIN_FLIST_ELEM_ADD(cust_flist, PIN_FLD_SERVICES, 0, ebufp);
 
-        // 1 PIN_FLD_services_OBJ POID [0] 0.0.0.1 /service/ -1 0
-        pdp = PIN_POID_CREATE(db, "/service/", neg_one, ebufp);
+        // 1 PIN_FLD_services_OBJ POID [0] 0.0.0.1 /service/nextaig3 -1 0
+        pdp = PIN_POID_CREATE(db, "/service/nextaig3", neg_one, ebufp);
         PIN_FLIST_FLD_PUT(services, PIN_FLD_SERVICE_OBJ, (void *)pdp, ebufp);
 
         // 1 PIN_FLD_PASSWD_CLEAR STR [0] "MY_PW"
@@ -485,24 +485,7 @@ fm_nai_commit_customer(
        // 1 PIN_FLD_LOGIN STR [0] "MY_LOGIN"
         PIN_FLIST_FLD_SET(services, PIN_FLD_LOGIN, (void *)login, ebufp);
         
-        /*
-         * Do NOT populate PIN_FLD_SERVICE_NEXTAIG3 here.
-         * PCM_OP_CUST_CREATE_SERVICE drops it and then complains
-         * that field 10010 is missing.
-         * We will write it after customer creation succeeds.
-         
-
-        pin_flist_t *nextai_info = PIN_FLIST_SUBSTR_ADD(services, PIN_FLD_SERVICE_NEXTAIG3, ebufp);
-
-        int32 model_type = 30;
-
-        if (strstr(code, "O3.5") != NULL) {
-                model_type = 35;
-        } else {
-                model_type = 30;
-        }
-        
-        PIN_FLIST_FLD_SET(nextai_info, PIN_FLD_MODELTYPE_NAI3, &model_type, ebufp);*/
+        /* Do NOT populate PIN_FLD_SERVICE_NEXTAIG3 here. */
 
         // DEALS
         // 1 PIN_FLD_DEALS ARRAY [0]
