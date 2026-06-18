@@ -484,6 +484,10 @@ fm_nai_commit_customer(
 
         // 1 PIN_FLD_LOGIN STR [0] "MY_LOGIN"
         PIN_FLIST_FLD_SET(services, PIN_FLD_LOGIN, (void *)login, ebufp);
+        pin_flist_t *nextai_info = PIN_FLIST_SUBSTR_ADD(services, PIN_FLD_SERVICE_NEXTAIG3, ebufp);
+
+        int32 model_type = 30;
+        PIN_FLIST_FLD_SET(nextai_info, PIN_FLD_MODELTYPE_NAI3, &model_type, ebufp);
 
         // DEALS
         // 1 PIN_FLD_DEALS ARRAY [0]
