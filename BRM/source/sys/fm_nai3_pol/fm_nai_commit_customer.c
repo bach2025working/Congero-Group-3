@@ -565,7 +565,7 @@ fm_nai_commit_customer(
         PIN_FLIST_FLD_SET(inv_info, PIN_FLD_ADDRESS, (void *)address, ebufp);
 
         // 1 PIN_FLD_PAY_TYPE ENUM [0] 10001
-        int64 paytype = 10001;
+        int32 paytype = 10001;
         PIN_FLIST_FLD_SET(payinfo, PIN_FLD_PAY_TYPE, &paytype, ebufp);
 
         // ACCTINFO
