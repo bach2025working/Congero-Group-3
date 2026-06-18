@@ -165,24 +165,24 @@ op_nai_act_rate(
          * strstr(word, pattern) returns a pointer to the first letter of pattern inside word,
          * granted pattern exists in word, else return NULL
          */
-        char * pattern = "service/nextai";
-        char * is_nextai = NULL;
+        char * pattern = "service/nextaig3";
+        char * is_nextaig3 = NULL;
         char *poid_str = NULL;
         int32 len = 0; // To store the length of the string representation
 
         if (service_poid) {
             PIN_POID_TO_STR((poid_t *)service_poid, &poid_str, &len, ebufp);
             if (!PIN_ERR_IS_ERR(ebufp)) {
-                is_nextai = strstr(poid_str, pattern);
+                is_nextaig3 = strstr(poid_str, pattern);
             }
         }
 
         /*
-         * If the user is not registered as /service/nextai, or he just dne
+         * If the user is not registered as /service/nextaig3, or he just dne
          * we return error code 1 with a list of missing fields
          * Note: destroy the input flist since we're returning
          */ 
-        if (!is_nextai) {
+        if (!is_nextaig3) {
             pin_flist_t *r_flistp = PIN_FLIST_CREATE(ebufp);
             poid_t *err_poid = PIN_POID_CREATE(1, "/error", -1, ebufp);
             PIN_FLIST_FLD_SET(r_flistp, PIN_FLD_POID, err_poid, ebufp);
@@ -435,22 +435,22 @@ fm_nai_act_rate(
         pin_flist_t * inherited_info = PIN_FLIST_ELEM_ADD(cust_flist, PIN_FLD_INHERITED_INFO, 0, ebufp);
 
         // 1     PIN_FLD_INFO_NAI3 SUBSTRUCT [0]
-        pin_flist_t * nextai = PIN_FLIST_ELEM_ADD(inherited_info, PIN_FLD_INFO_NAI3, 0, ebufp);
+        pin_flist_t * nextaig3 = PIN_FLIST_ELEM_ADD(inherited_info, PIN_FLD_INFO_NAI3, 0, ebufp);
 
         // 2         PIN_FLD_MODELTYPE_NAI3 STR [0] "3.0 or 3.5"
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_MODELTYPE_NAI3, (void *)model_code, ebufp);
+        PIN_FLIST_FLD_SET(nextaig3, PIN_FLD_MODELTYPE_NAI3, (void *)model_code, ebufp);
 
         // 2         PIN_FLD_TRANSACTION_ID STR [0] "MYTRANSID"
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_TRANSACTION_ID, (void *)trans_id, ebufp);
+        PIN_FLIST_FLD_SET(nextaig3, PIN_FLD_TRANSACTION_ID, (void *)trans_id, ebufp);
 
         // 2         PIN_FLD_PROMPT_NAI3 STR [0] "MYPROMPT"
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_PROMPT_NAI3, (void *)prompt_txt, ebufp);
+        PIN_FLIST_FLD_SET(nextaig3, PIN_FLD_PROMPT_NAI3, (void *)prompt_txt, ebufp);
 
         // 2         PIN_FLD_INPUT_TOKENS_NAI3 INT [0] 205000
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_INPUT_TOKENS_NAI3, (void *)tokens_in, ebufp);
+        PIN_FLIST_FLD_SET(nextaig3, PIN_FLD_INPUT_TOKENS_NAI3, (void *)tokens_in, ebufp);
 
         // 2         PIN_FLD_OUTPUT_TOKENS_NAI3 INT [0] 200
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_OUTPUT_TOKENS_NAI3, (void *)tokens_out, ebufp);
+        PIN_FLIST_FLD_SET(nextaig3, PIN_FLD_OUTPUT_TOKENS_NAI3, (void *)tokens_out, ebufp);
 
         pin_flist_t * pcm_return_flist = PIN_FLIST_CREATE(ebufp);
         PCM_OP(ctxp, PCM_OP_ACT_LOAD_SESSION, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
