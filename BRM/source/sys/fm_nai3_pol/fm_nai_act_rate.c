@@ -30,12 +30,12 @@ static const char Sccs_id[] = "@(#)% %";
 
 #include <pcm.h>
 #include "ops/act.h"
-#include "ops/custom_fields.h"
+#include "ops/custom_flds.h"
 #include <pinlog.h>
 
 #define FILE_LOGNAME "fm_nai_act_rate.c(1)"
 
-#include "ops/nai_cust_ops.h"
+#include "ops/naig3_custom_ops.h"
 #include "cm_fm.h"
 #include "pin_errs.h"
 
@@ -144,11 +144,11 @@ op_nai_act_rate(
         // date will hold the actual date time in the format month-date-year and convert to epoch time
         char * date = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_NAME, 0, ebufp);
         char * descr = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_DESCR, 0, ebufp);
-        char * model_code = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_MODEL_CODE, 0, ebufp);
-        char * trans_id = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_TRANS_ID, 0, ebufp);
-        char * prompt_txt = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_PROMPT_TXT, 0, ebufp);
-        int64 * tokens_in = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_TOKENS_IN, 0, ebufp);
-        int64 * tokens_out = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_TOKENS_OUT, 0, ebufp);
+        char * model_code = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_MODELTYPE_NAI3, 0, ebufp);
+        char * trans_id = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_TRANSACTION_ID, 0, ebufp);
+        char * prompt_txt = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_PROMPT_NAI3, 0, ebufp);
+        int64 * tokens_in = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_INPUT_TOKENS_NAI3, 0, ebufp);
+        int64 * tokens_out = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_OUTPUT_TOKENS_NAI3, 0, ebufp);
 
         /*
          * service_flist will hold the PIN_FLD_RESULTS 
@@ -434,23 +434,23 @@ fm_nai_act_rate(
         // 0 PIN_FLD_INHERITED_INFO SUBSTRUCT [0]
         pin_flist_t * inherited_info = PIN_FLIST_ELEM_ADD(cust_flist, PIN_FLD_INHERITED_INFO, 0, ebufp);
 
-        // 1     PIN_FLD_NEXTAI SUBSTRUCT [0]
-        pin_flist_t * nextai = PIN_FLIST_ELEM_ADD(inherited_info, PIN_FLD_NEXTAI, 0, ebufp);
+        // 1     PIN_FLD_INFO_NAI3 SUBSTRUCT [0]
+        pin_flist_t * nextai = PIN_FLIST_ELEM_ADD(inherited_info, PIN_FLD_INFO_NAI3, 0, ebufp);
 
-        // 2         PIN_FLD_MODEL_CODE STR [0] "3.0 or 3.5"
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_MODEL_CODE, (void *)model_code, ebufp);
+        // 2         PIN_FLD_MODELTYPE_NAI3 STR [0] "3.0 or 3.5"
+        PIN_FLIST_FLD_SET(nextai, PIN_FLD_MODELTYPE_NAI3, (void *)model_code, ebufp);
 
-        // 2         PIN_FLD_TRANS_ID STR [0] "MYTRANSID"
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_TRANS_ID, (void *)trans_id, ebufp);
+        // 2         PIN_FLD_TRANSACTION_ID STR [0] "MYTRANSID"
+        PIN_FLIST_FLD_SET(nextai, PIN_FLD_TRANSACTION_ID, (void *)trans_id, ebufp);
 
-        // 2         PIN_FLD_PROMPT_TXT STR [0] "MYPROMPT"
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_PROMPT_TXT, (void *)prompt_txt, ebufp);
+        // 2         PIN_FLD_PROMPT_NAI3 STR [0] "MYPROMPT"
+        PIN_FLIST_FLD_SET(nextai, PIN_FLD_PROMPT_NAI3, (void *)prompt_txt, ebufp);
 
-        // 2         PIN_FLD_TOKENS_IN INT [0] 205000
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_TOKENS_IN, (void *)tokens_in, ebufp);
+        // 2         PIN_FLD_INPUT_TOKENS_NAI3 INT [0] 205000
+        PIN_FLIST_FLD_SET(nextai, PIN_FLD_INPUT_TOKENS_NAI3, (void *)tokens_in, ebufp);
 
-        // 2         PIN_FLD_TOKENS_OUT INT [0] 200
-        PIN_FLIST_FLD_SET(nextai, PIN_FLD_TOKENS_OUT, (void *)tokens_out, ebufp);
+        // 2         PIN_FLD_OUTPUT_TOKENS_NAI3 INT [0] 200
+        PIN_FLIST_FLD_SET(nextai, PIN_FLD_OUTPUT_TOKENS_NAI3, (void *)tokens_out, ebufp);
 
         pin_flist_t * pcm_return_flist = PIN_FLIST_CREATE(ebufp);
         PCM_OP(ctxp, PCM_OP_ACT_LOAD_SESSION, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
