@@ -145,24 +145,24 @@ op_nai_get_available_res(
          * strstr(word, pattern) returns a pointer to the first letter of pattern inside word,
          * granted pattern exists in word, else return NULL
          */
-        char * pattern = "service/nextai";
-        char * is_nextai = NULL;
+        char * pattern = "service/nextaig3g3";
+        char * is_nextaig3 = NULL;
         char *poid_str = NULL;
         int32 len = 0; // To store the length of the string representation
 
         if (service_poid) {
             PIN_POID_TO_STR((poid_t *)service_poid, &poid_str, &len, ebufp);
             if (!PIN_ERR_IS_ERR(ebufp)) {
-                is_nextai = strstr(poid_str, pattern);
+                is_nextaig3 = strstr(poid_str, pattern);
             }
         }
 
         /*
-         * If the user is not registered as /service/nextai, or he just dne
+         * If the user is not registered as /service/nextaig3, or he just dne
          * we return error code 1 with a list of missing fields
          * Note: destroy the input flist since we're returning
          */ 
-        if (!is_nextai) {
+        if (!is_nextaig3) {
             pin_flist_t *r_flistp = PIN_FLIST_CREATE(ebufp);
             poid_t *err_poid = PIN_POID_CREATE(1, "/error", -1, ebufp);
             PIN_FLIST_FLD_SET(r_flistp, PIN_FLD_POID, err_poid, ebufp);
