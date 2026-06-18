@@ -552,7 +552,7 @@ fm_nai_commit_customer(
         // 3 PIN_FLD_DEKUVERT_DESCR STR [0] "MY_EMAIL@gmail.com"
         PIN_FLIST_FLD_SET(inv_info, PIN_FLD_DELIVERY_DESCR, (void *)email_addr, ebufp);
         // 3 PIN_FLD_EMAIL_ADDR STR [0] ""
-        PIN_FLIST_FLD_SET(inv_info, PIN_FLD_EMAIL_ADDR, NULL, ebufp);
+        PIN_FLIST_FLD_SET(inv_info, PIN_FLD_EMAIL_ADDR, (void *)email_addr, ebufp);
         // 3 PIN_FLD_COUNTRY STR [0] "USA"
         PIN_FLIST_FLD_SET(inv_info, PIN_FLD_COUNTRY, (void *)country, ebufp);
         // 3 PIN_FLD_ZIP STR [0] "MY_ZIP"
