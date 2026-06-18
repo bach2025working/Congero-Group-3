@@ -1,0 +1,5 @@
+#========================================================================
+#NextAI Group 3 - for rating model usage event
+#========================================================================
+/event/session/usageg3          : Prompt_NAI3   : 1 : none
+/event/session/usageg3          : Tokens_NAI3   : (PIN_FLD_INFO_NAI3.PIN_FLD_INPUT_TOKENS_NAI3+PIN_FLD_INFO_NAI3.PIN_FLD_OUTPUT_TOKENS_NAI3)/1000       : none
