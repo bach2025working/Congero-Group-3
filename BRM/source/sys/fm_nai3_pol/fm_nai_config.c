@@ -1,0 +1,36 @@
+/*
+* Copyright (c) 2002, 2014, Oracle and/or its affiliates. All rights reserved.
+ *
+ * This material is the confidential property of Oracle Corporation
+ * or its licensors and may be used, reproduced, stored or transmitted
+ * only in accordance with a valid Oracle license or sublicense agreement.
+ *
+ */
+
+#ifndef lint
+static const char Sccs_id[] = "@(#)$Id: fm_nai_config.c /cgbubrm_7.5.0.portalbase/1 2015/11/27 04:09:40 nishahan Exp $";
+#endif
+
+#include <stdio.h>
+#include <string.h>
+#include <pinlog.h>
+#include "ops/nai_cust_ops.h"
+#include "pcm.h"
+#include "cm_fm.h"
+
+#define FILE_LOGNAME "fm_nai_config.c"
+
+PIN_EXPORT void * fm_nai_config_func();
+
+struct cm_fm_config fm_nai_config[] = {
+{ NAI_OP_COMMIT_CUSTOMER, "op_nai_commit_customer" },
+{ NAI_OP_GET_AVAILABLE_RES, "op_nai_get_available_res" },
+{ NAI_OP_ACT_RATE, "op_nai_act_rate" },
+{ 0,    (char *)0 }
+};
+
+void *
+fm_nai_config_func()
+{
+  return ((void *) (fm_nai_config));
+}
