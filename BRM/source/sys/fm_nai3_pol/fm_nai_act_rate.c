@@ -414,8 +414,8 @@ fm_nai_act_rate(
         // 0 PIN_FLD_POID POID [0] 0.0.0.1 /plan ACCOUNT_NUM 0
         PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_POID, (void *)account_obj, ebufp);
 
-        // 0 PIN_FLD_OBJ_TYPE STR [0] "/usage"
-        PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_OBJ_TYPE, (void *) "/usage", ebufp);
+        // 0 PIN_FLD_OBJ_TYPE STR [0] "/usageg3"
+        PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_OBJ_TYPE, (void *) "/usageg3", ebufp);
 
         // 0 PIN_FLD_PROGRAM_NAME STR [0] "load_session.nap"
         PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_PROGRAM_NAME, (void *) "load_session.nap", ebufp);
