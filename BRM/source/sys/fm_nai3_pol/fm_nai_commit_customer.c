@@ -484,9 +484,17 @@ fm_nai_commit_customer(
 
         // 1 PIN_FLD_LOGIN STR [0] "MY_LOGIN"
         PIN_FLIST_FLD_SET(services, PIN_FLD_LOGIN, (void *)login, ebufp);
-        pin_flist_t *nextai_info = PIN_FLIST_SUBSTR_ADD(services, PIN_FLD_INFO_NAI3, ebufp);
 
-        char *model_type = "30";
+        pin_flist_t *nextai_info = PIN_FLIST_SUBSTR_ADD(services, PIN_FLD_SERVICE_NEXTAIG3, ebufp);
+
+        char *model_type = NULL;
+
+        if (strstr(code, "O3.5") != NULL) {
+                model_type = "Odyssey3.5";
+        } else {
+                model_type = "Odyssey3";
+        }
+
         PIN_FLIST_FLD_SET(nextai_info, PIN_FLD_MODELTYPE_NAI3, (void *)model_type, ebufp);
 
         // DEALS
