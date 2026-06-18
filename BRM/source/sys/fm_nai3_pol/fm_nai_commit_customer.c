@@ -467,8 +467,8 @@ fm_nai_commit_customer(
         // 0 PIN_FLD_services ARRAY [0]
         pin_flist_t * services = PIN_FLIST_ELEM_ADD(cust_flist, PIN_FLD_SERVICES, 0, ebufp);
 
-        // 1 PIN_FLD_services_OBJ POID [0] 0.0.0.1 /service/nextai -1 0
-        pdp = PIN_POID_CREATE(db, "/service/nextai", neg_one, ebufp);
+        // 1 PIN_FLD_services_OBJ POID [0] 0.0.0.1 /service/nextaig3 -1 0
+        pdp = PIN_POID_CREATE(db, "/service/nextaig3", neg_one, ebufp);
         PIN_FLIST_FLD_PUT(services, PIN_FLD_SERVICE_OBJ, (void *)pdp, ebufp);
 
         // 1 PIN_FLD_PASSWD_CLEAR STR [0] "MY_PW"
