@@ -14,7 +14,7 @@ static const char Sccs_id[] = "@(#)$Id: fm_nai_config.c /cgbubrm_7.5.0.portalbas
 #include <stdio.h>
 #include <string.h>
 #include <pinlog.h>
-#include "ops/nai_cust_ops.h"
+#include "ops/naig3_custom_ops.h"
 #include "pcm.h"
 #include "cm_fm.h"
 
@@ -23,9 +23,9 @@ static const char Sccs_id[] = "@(#)$Id: fm_nai_config.c /cgbubrm_7.5.0.portalbas
 PIN_EXPORT void * fm_nai_config_func();
 
 struct cm_fm_config fm_nai_config[] = {
-{ NAI_OP_COMMIT_CUSTOMER, "op_nai_commit_customer" },
-{ NAI_OP_GET_AVAILABLE_RES, "op_nai_get_available_res" },
-{ NAI_OP_ACT_RATE, "op_nai_act_rate" },
+{ NAI3_OP_COMMIT_CUSTOMER, "op_nai3_commit_customer" },
+{ NAI3_OP_GET_AVAILABLE_RES, "op_nai3_get_available_res" },
+{ NAI3_OP_ACT_RATE, "op_nai3_act_rate" },
 { 0,    (char *)0 }
 };
 
