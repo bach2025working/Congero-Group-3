@@ -385,7 +385,15 @@ search_deal(
                           (void *) "select X from /deal where F1 = V1 ", ebufp);
 
         vp = PIN_FLIST_ELEM_ADD(search_flist, PIN_FLD_ARGS, 1, ebufp);
-        PIN_FLIST_FLD_SET(vp, PIN_FLD_CODE, (void *)code, ebufp);
+        char deal_code[256];
+        snprintf(deal_code, sizeof(deal_code), "%s", code);
+        
+        char *p = strstr(deal_code, "-Plan");
+        if (p != NULL) {
+            strcpy(p, "-Deal");
+        }
+        PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, deal_code); // debug log
+        PIN_FLIST_FLD_SET(vp, PIN_FLD_CODE, (void *)deal_code, ebufp);
 
         vp = PIN_FLIST_ELEM_ADD(search_flist, PIN_FLD_RESULTS, 0, ebufp);
         PIN_FLIST_FLD_SET(vp, PIN_FLD_POID, (void *)NULL, ebufp);
