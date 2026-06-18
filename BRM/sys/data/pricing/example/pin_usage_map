@@ -1,0 +1,3 @@
+# for Next AI group Group 3
+/event/session/usageg3  : Prompt_NAI3 : 0: 0: 0: 0: 0: 0: 0: nai_prompt_g3
+/event/session/usageg3  : Tokens_NAI3 : 0: 0: 1: NONE: 1: NONE: UP: nai_token_g3
