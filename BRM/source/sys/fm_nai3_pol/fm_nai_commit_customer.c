@@ -353,9 +353,9 @@ search_plan(
                             "search_plan error", ebufp);
         }
 
-        if (plan_poid == NULL || deal_poid == NULL) {
+        if (plan_poid == NULL) {
                 PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
-                                "plan_poid or deal_poid is NULL");
+                                "plan_poid is NULL");
                 return;
         }
 
@@ -443,9 +443,9 @@ search_deal(
             PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "FINALLY ESCAPE SEARCH DEAL");
         }
 
-        if (plan_poid == NULL || deal_poid == NULL) {
+        if (deal_poid == NULL) {
                 PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
-                                "plan_poid or deal_poid is NULL");
+                                "deal_poid is NULL");
                 return;
         }
 
