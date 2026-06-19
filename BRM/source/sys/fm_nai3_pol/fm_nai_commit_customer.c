@@ -328,19 +328,35 @@ search_plan(
          * Use an internal return flist for the PCM call, when we retrieve the fields
          * from PIN_FLD_RESULTS, use TAKE since we are destroying the return flist
          */
+
         cookie = NULL;
         vp = PIN_FLIST_ELEM_GET_NEXT(ret_flist, PIN_FLD_RESULTS, &element_id, 1, &cookie, ebufp);
-        *plan_poid = PIN_FLIST_FLD_TAKE(vp, PIN_FLD_POID, 0, ebufp); 
+        
+        if (vp == NULL) {
+                PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
+                                "search_plan: no plan found");
+                PIN_ERR_CLEAR_ERR(ebufp);
+                goto cleanup;
+        }
+        
+        *plan_poid = PIN_FLIST_FLD_TAKE(vp, PIN_FLD_POID, 0, ebufp);
 
         /*
          * Cleaning
-         */
-        PIN_FLIST_DESTROY_EX(&search_flist, NULL);
-        PIN_FLIST_DESTROY_EX(&ret_flist, NULL);
+        */
+        cleanup:
+                PIN_FLIST_DESTROY_EX(&search_flist, NULL);
+                PIN_FLIST_DESTROY_EX(&ret_flist, NULL);
 
         if (PIN_ERR_IS_ERR(ebufp)) {
             PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
                             "search_plan error", ebufp);
+        }
+
+        if (plan_poid == NULL || deal_poid == NULL) {
+                PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
+                                "plan_poid or deal_poid is NULL");
+                return;
         }
 
         return;
@@ -405,10 +421,19 @@ search_deal(
 
         cookie = NULL;
         vp = PIN_FLIST_ELEM_GET_NEXT(ret_flist, PIN_FLD_RESULTS, &element_id, 1, &cookie, ebufp);
-        *deal_poid = PIN_FLIST_FLD_TAKE(vp, PIN_FLD_POID, 0, ebufp); 
+        
+        if (vp == NULL) {
+                PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
+                                "search_deal: no deal found");
+                PIN_ERR_CLEAR_ERR(ebufp);
+                goto cleanup;
+        }
+        
+        *deal_poid = PIN_FLIST_FLD_TAKE(vp, PIN_FLD_POID, 0, ebufp);
 
-        PIN_FLIST_DESTROY_EX(&search_flist, NULL);
-        PIN_FLIST_DESTROY_EX(&ret_flist, NULL);
+        cleanup:
+                PIN_FLIST_DESTROY_EX(&search_flist, NULL);
+                PIN_FLIST_DESTROY_EX(&ret_flist, NULL);
 
         if (PIN_ERR_IS_ERR(ebufp)) {
             PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
@@ -416,6 +441,12 @@ search_deal(
         }
         else {
             PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "FINALLY ESCAPE SEARCH DEAL");
+        }
+
+        if (plan_poid == NULL || deal_poid == NULL) {
+                PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
+                                "plan_poid or deal_poid is NULL");
+                return;
         }
 
         return;
