@@ -76,8 +76,8 @@ fm_nai_act_rate(
         char                    *model_code,
         char                    *trans_id,
         char                    *prompt_txt,
-        int32                   *tokens_in,
-        int32                   *tokens_out,
+        int64                   *tokens_in,
+        int64                   *tokens_out,
         pin_flist_t             **r_flistpp,
         pin_errbuf_t            *ebufp);
 
@@ -147,8 +147,8 @@ op_nai_act_rate(
         char * model_code = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_MODELTYPE_NAI3, 0, ebufp);
         char * trans_id = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_TRANSACTION_ID, 0, ebufp);
         char * prompt_txt = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_PROMPT_NAI3, 0, ebufp);
-        int32 * tokens_in = (int32 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_INPUT_TOKENS_NAI3, 0, ebufp);
-        int32 * tokens_out = (int32 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_OUTPUT_TOKENS_NAI3, 0, ebufp);
+        int64 * tokens_in = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_INPUT_TOKENS_NAI3, 0, ebufp);
+        int64 * tokens_out = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_OUTPUT_TOKENS_NAI3, 0, ebufp);
 
         /*
          * service_flist will hold the PIN_FLD_RESULTS 
@@ -371,8 +371,8 @@ fm_nai_act_rate(
         char                    *model_code,
         char                    *trans_id,
         char                    *prompt_txt,
-        int32                   *tokens_in,
-        int32                   *tokens_out,
+        int64                   *tokens_in,
+        int64                   *tokens_out,
         pin_flist_t             **r_flistpp,
         pin_errbuf_t            *ebufp)
 {
