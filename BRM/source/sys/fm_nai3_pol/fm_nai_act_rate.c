@@ -76,8 +76,8 @@ fm_nai_act_rate(
         char                    *model_code,
         char                    *trans_id,
         char                    *prompt_txt,
-        int64                   *tokens_in,
-        int64                   *tokens_out,
+        int32                   *tokens_in,
+        int32                   *tokens_out,
         pin_flist_t             **r_flistpp,
         pin_errbuf_t            *ebufp);
 
@@ -371,8 +371,8 @@ fm_nai_act_rate(
         char                    *model_code,
         char                    *trans_id,
         char                    *prompt_txt,
-        int64                   *tokens_in,
-        int64                   *tokens_out,
+        int32                   *tokens_in,
+        int32                   *tokens_out,
         pin_flist_t             **r_flistpp,
         pin_errbuf_t            *ebufp)
 {
