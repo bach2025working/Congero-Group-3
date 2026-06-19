@@ -224,11 +224,11 @@ op_nai_commit_customer(
          * plan_flist will hold the PIN_FLD_RESULTS 
          * and plan_poid will hold the poid of the plan (via TAKE)
          */ 
-        void * plan_poid = NULL;
+        poid_t *plan_poid = NULL;
         pin_flist_t * plan_flist = NULL;
         search_plan(ctxp, flags, a_pdp, code, &plan_flist, &plan_poid, ebufp);
 
-        void * deal_poid = NULL;
+        poid_t *deal_poid = NULL;
         pin_flist_t * deal_flist = NULL;
         search_deal(ctxp, flags, a_pdp, code, &deal_flist, &deal_poid, ebufp);
 
@@ -406,8 +406,9 @@ search_deal(
         
         char *p = strstr(deal_code, "-Plan");
         if (p != NULL) {
-            strcpy(p, "-Deal");
+            memcpy(p, "-Deal", 5);
         }
+        
         PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, deal_code); // debug log
         PIN_FLIST_FLD_SET(vp, PIN_FLD_CODE, (void *)deal_code, ebufp);
 
