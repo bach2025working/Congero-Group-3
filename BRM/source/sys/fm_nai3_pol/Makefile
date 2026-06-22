@@ -28,7 +28,7 @@ CFLAGS_solaris= -g
 CFLAGS_hpux= -g -Ae +Z +DAportable
 CFLAGS_hpux_ia64= -g -Ae +Z
 CFLAGS_aix= -g -Drs6000 -D__aix -Dunix -D__unix
-CFLAGS_linux= -m32 -fPIC
+CFLAGS_linux= -fPIC
 CFLAGS= $(CFLAGS_$(OS)) -DFLIST_HEAP
 
 CPPFLAGS = -I$(INCDIR)
@@ -38,7 +38,7 @@ LDFLAGS_solaris= -G
 LDFLAGS_hpux= -b
 LDFLAGS_hpux_ia64= -b
 LDFLAGS_aix= -G -bnoentry -bexpall -brtl -lc
-LDFLAGS_linux= -m elf_i386 -shared -L/usr/lib
+LDFLAGS_linux= -shared -L/usr/lib
 LDFLAGS = $(LDFLAGS_$(OS))
 
 SL_EXT_solaris= so
