@@ -1,0 +1,20 @@
+-- After running any of the flists above, take the event POID printed in
+-- PIN_FLD_POID at the bottom of the xop output, then run these three
+-- queries to confirm rating succeeded.
+
+-- 1. Check the event itself (unrated_quantity should be 0, rum_name should
+--    be populated, e.g. 'Tokens_NAI3' or 'Prompt_NAI3')
+SELECT poid_id0, unrated_quantity, rum_name
+FROM event_t
+WHERE poid_id0 = <PASTE_EVENT_POID_HERE>;
+
+-- 2. Check the actual charge (should return a row with a real amount)
+SELECT obj_id0, impact_category, amount, tax_code, resource_id
+FROM event_bal_impacts_t
+WHERE obj_id0 = <PASTE_EVENT_POID_HERE>;
+
+-- 3. Sanity check: confirm the account/service/product are correctly linked
+SELECT pp.account_obj_id0, pp.name, pp.usage_start_t, s.poid_type, s.login
+FROM purchased_product_t pp
+JOIN service_t s ON s.account_obj_id0 = pp.account_obj_id0
+WHERE pp.account_obj_id0 = 872146;

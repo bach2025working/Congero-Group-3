@@ -1,0 +1,8 @@
+# Use this to read back any event by POID and inspect every field,
+# including PIN_FLD_BAL_IMPACTS / PIN_FLD_SUB_BAL_IMPACTS arrays which
+# only get populated when rating actually succeeds.
+
+r << XXX 1
+0 PIN_FLD_POID POID [0] 0.0.0.1 /event/session/usageg3 <PASTE_EVENT_POID_HERE> 0
+XXX
+robj 1

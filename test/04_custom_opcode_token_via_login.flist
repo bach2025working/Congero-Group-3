@@ -1,0 +1,26 @@
+# This calls YOUR custom opcode (280217, NAI3_OP_ACT_RATE) instead of
+# bypassing it and calling PCM_OP_ACT_LOAD_SESSION (161) directly.
+# Use this once your team confirms the production opcode path works
+# end-to-end, not just the bypass test above.
+#
+# NOTE: as of this session, your custom opcode's internal search_login()
+# uses PCM_OP_SEARCH with PIN_FLD_TEMPLATE (field 68), which is MISSING
+# from this server's live data dictionary (confirmed via
+# SELECT * FROM dd_fields_t WHERE field_num = 68 -> no rows).
+# This will currently fail with PIN_ERR_BAD_ARG on PIN_FLD_TEMPLATE.
+# This is a separate, smaller, NOT-YET-FIXED issue from the virtual-time
+# root cause documented in root_cause_report.md. Fix this before relying
+# on the opcode-based flist below for the live demo; until then use
+# flist 02 (direct PCM_OP_ACT_LOAD_SESSION) for the actual demo.
+
+r << XXX 1
+0 PIN_FLD_LOGIN STR [0] "kevin5@nai3.test"
+0 PIN_FLD_NAME STR [0] "10-14-2026"
+0 PIN_FLD_DESCR STR [0] "Custom opcode token test"
+0 PIN_FLD_TRANSACTION_ID DECIMAL [0] 90003.00
+0 PIN_FLD_MODELTYPE_NAI3 ENUM [0] 1
+0 PIN_FLD_PROMPT_NAI3 STR [0] "Custom opcode test prompt"
+0  10013 INT [0] 1000
+0 10014 INT [0] 500
+XXX
+xop 280217 0 1
