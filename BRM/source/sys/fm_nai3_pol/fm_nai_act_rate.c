@@ -193,7 +193,7 @@ op_nai_act_rate(
             *r_flistpp = r_flistp;
 
             PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR, err_msg, ebufp);
-            PIN_FLIST_DESTROY_EX(&i_flistp, ebufp);
+            /* PIN_FLIST_DESTROY_EX(&i_flistp, ebufp); */
             return;
         }
 
@@ -214,7 +214,7 @@ op_nai_act_rate(
                         "op_nai_act_rate output flist", *r_flistpp);
         }
 
-        PIN_FLIST_DESTROY_EX(&i_flistp, ebufp);
+        /* PIN_FLIST_DESTROY_EX(&i_flistp, ebufp); */
         PIN_FLIST_DESTROY_EX(&service_flist, ebufp);
 
         return;
