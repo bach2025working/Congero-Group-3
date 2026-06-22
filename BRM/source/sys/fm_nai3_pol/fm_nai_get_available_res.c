@@ -133,8 +133,8 @@ op_nai_get_available_res(
          * service_flist will hold the PIN_FLD_RESULTS 
          * and service_poid will hold the poid of the service (via TAKE)
          */ 
-        void * service_poid = NULL;
-        void * account_obj = NULL;
+        poid_t *service_poid = NULL;
+        poid_t *account_obj = NULL;
         pin_flist_t * service_flist = NULL;
         search_login(ctxp, flags, a_pdp, login, &service_flist, &service_poid, &account_obj, ebufp);
         // note, may need to return a poid for account_obj as well
@@ -345,11 +345,18 @@ fm_nai_get_available_res(
 
         // 2 PIN_FLD_THRESHOLD INT [0] 0
         PIN_FLIST_FLD_SET(thresholds, PIN_FLD_THRESHOLD, &zero, ebufp);
-        // 2 PIN_FLD_AMOUNT_DECIMAL [0] 0.0
-        PIN_FLIST_FLD_SET(thresholds, PIN_FLD_AMOUNT, &zero, ebufp);
-
-        // 1 PIN_FLD_CURRENT_BAL DECIMAL [0] 0.0
-        PIN_FLIST_FLD_SET(balances, PIN_FLD_CURRENT_BAL, &zero, ebufp);
+        
+        // 2 PIN_FLD_AMOUNT DECIMAL [0] NULL
+        PIN_FLIST_FLD_SET(thresholds, PIN_FLD_AMOUNT, NULL, ebufp);
+        
+        // 1 PIN_FLD_CURRENT_BAL DECIMAL [0] NULL
+        PIN_FLIST_FLD_SET(balances, PIN_FLD_CURRENT_BAL, NULL, ebufp);
+        
+        // 1 PIN_FLD_GRANTED_BAL DECIMAL [0] NULL
+        PIN_FLIST_FLD_SET(balances, PIN_FLD_GRANTED_BAL, NULL, ebufp);
+        
+        // 1 PIN_FLD_RESOURCE_ID INT [0] NULL
+        PIN_FLIST_FLD_SET(balances, PIN_FLD_RESOURCE_ID, NULL, ebufp);
 
         pin_flist_t * pcm_return_flist = PIN_FLIST_CREATE(ebufp);
         PCM_OP(ctxp, PCM_OP_BAL_GET_BALANCES, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
