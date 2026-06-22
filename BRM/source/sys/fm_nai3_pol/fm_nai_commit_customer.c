@@ -353,7 +353,7 @@ search_plan(
                             "search_plan error", ebufp);
         }
 
-        if (plan_poid == NULL) {
+        if (*plan_poid == NULL) {
                 PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
                                 "plan_poid is NULL");
                 return;
@@ -444,7 +444,7 @@ search_deal(
             PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "FINALLY ESCAPE SEARCH DEAL");
         }
 
-        if (deal_poid == NULL) {
+        if (*deal_poid == NULL) {
                 PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR,
                                 "deal_poid is NULL");
                 return;
@@ -569,7 +569,7 @@ fm_nai_commit_customer(
         // INHERITED INFO
         PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "STARTING INHERIT INFO");
         // PIN_FLD_INHERITED_INFO SUBSTRUCT [0]
-        pin_flist_t * in_info = PIN_FLIST_ELEM_ADD(payinfo, PIN_FLD_INHERITED_INFO, 0, ebufp);
+        pin_flist_t *in_info = PIN_FLIST_SUBSTR_ADD(payinfo, PIN_FLD_INHERITED_INFO, ebufp);
 
         // INV_INFO
         PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "STARTING INV INFO");
