@@ -349,12 +349,6 @@ fm_nai_get_available_res(
         // 2 PIN_FLD_AMOUNT DECIMAL [0] NULL
         PIN_FLIST_FLD_SET(thresholds, PIN_FLD_AMOUNT, NULL, ebufp);
         
-        // 1 PIN_FLD_CURRENT_BAL DECIMAL [0] NULL
-        current_bal = (pin_decimal_t *)PIN_FLIST_FLD_TAKE(balance_flist, PIN_FLD_CURRENT_BAL, 1, ebufp);
-        
-        // 1 PIN_FLD_GRANTED_BAL DECIMAL [0] NULL
-        granted_bal = (pin_decimal_t *)PIN_FLIST_FLD_TAKE(balance_flist, PIN_FLD_GRANTED_BAL, 1, ebufp);
-        
         // 1 PIN_FLD_RESOURCE_ID INT [0] NULL
         PIN_FLIST_FLD_SET(balances, PIN_FLD_RESOURCE_ID, NULL, ebufp);
 
@@ -362,14 +356,6 @@ fm_nai_get_available_res(
         PCM_OP(ctxp, PCM_OP_BAL_GET_BALANCES, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
 
         *r_flistpp = PIN_FLIST_CREATE(ebufp);
-
-        if (current_bal != NULL) {
-                PIN_FLIST_FLD_PUT(usd, PIN_FLD_CURRENT_BAL, current_bal, ebufp);
-        }
-        
-        if (granted_bal != NULL) {
-                PIN_FLIST_FLD_PUT(usd, PIN_FLD_GRANTED_BAL, granted_bal, ebufp);
-        }
 
         /*
          * If theres an error, sends error code 1 with the message
@@ -389,7 +375,8 @@ fm_nai_get_available_res(
                 if (cust_poid != NULL) {
                     PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_POID, (void *)cust_poid, ebufp);
             }
-
+                
+            int32 *resource_id = NULL;
             pin_decimal_t * current_bal = NULL;
             pin_decimal_t * granted_bal = NULL;
             pin_flist_t * balance_flist = NULL;
@@ -406,12 +393,26 @@ fm_nai_get_available_res(
             balance_flist = PIN_FLIST_ELEM_GET_NEXT(pcm_return_flist, PIN_FLD_BALANCES, &element_id, 1, &cookie, ebufp);
             while (balance_flist != NULL) {
 
-                current_bal = (pin_decimal_t *)PIN_FLIST_FLD_TAKE(balance_flist, PIN_FLD_CURRENT_BAL, 0, ebufp);
-                granted_bal = (pin_decimal_t *)PIN_FLIST_FLD_TAKE(balance_flist, PIN_FLD_GRANTED_BAL, 0, ebufp);
-
                 usd = PIN_FLIST_ELEM_ADD(*r_flistpp, PIN_FLD_BALANCES, curr, ebufp);
-                PIN_FLIST_FLD_SET(usd, PIN_FLD_CURRENT_BAL, (void *)current_bal, ebufp);
-                PIN_FLIST_FLD_SET(usd, PIN_FLD_GRANTED_BAL, (void *)granted_bal, ebufp);
+                    
+                resource_id = (int32 *)PIN_FLIST_FLD_GET(balance_flist, PIN_FLD_RESOURCE_ID, 1, ebufp);
+                
+                if (resource_id != NULL) {
+                        PIN_FLIST_FLD_SET(usd, PIN_FLD_RESOURCE_ID, resource_id, ebufp);
+                }
+
+                current_bal = (pin_decimal_t *)PIN_FLIST_FLD_TAKE(balance_flist, PIN_FLD_CURRENT_BAL, 1, ebufp);
+                
+                granted_bal = (pin_decimal_t *)PIN_FLIST_FLD_TAKE(balance_flist, PIN_FLD_GRANTED_BAL, 1, ebufp);
+                
+                
+                if (current_bal != NULL) {
+                        PIN_FLIST_FLD_PUT(usd, PIN_FLD_CURRENT_BAL, current_bal, ebufp);
+                }
+                
+                if (granted_bal != NULL) {
+                        PIN_FLIST_FLD_PUT(usd, PIN_FLD_GRANTED_BAL, granted_bal, ebufp);
+                }
 
                 balance_flist = PIN_FLIST_ELEM_GET_NEXT(pcm_return_flist, PIN_FLD_BALANCES, &element_id, 1, &cookie, ebufp);
                 curr = curr + 1;
