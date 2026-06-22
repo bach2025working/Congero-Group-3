@@ -1,0 +1,14 @@
+# Step 1 - ALWAYS run this first before building any test event.
+# This server's clock is NOT real time. Get the current virtual time,
+# then use that timestamp (not today's real date) for START_T/END_T below.
+#
+# Run on the server shell (not in testnap):
+#
+#   pin_virtual_time
+#
+# Example output:
+#   mode 2  1791952198  Wed Oct 14 00:29:58 2026
+#
+# Take the numeric value (1791952198 in this example) and use it as the
+# TSTAMP value in flists 02-05 below. Replace 1791952198 with whatever
+# pin_virtual_time reports when you actually run this.
