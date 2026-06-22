@@ -1,0 +1,11 @@
+Oddisey 3.5
+Desc: $15 monthly with 100 included prompts AND $0.60 USD per extra prompt
+
+Tested By Kevin:
+  Email: kevin6@nai3.test
+  Billed: 47.25
+  Prompt input: 150
+  Billed Prompt: 50
+  Calculation: $15 (monthly) + $0.60 * 50 prompts (# of prompts billed) + 5% tax
+
+Conclusion: Passed
