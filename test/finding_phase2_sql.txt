@@ -1,0 +1,897 @@
+
+SQL> -- All RUM/UOM configs (rating)
+  2  SELECT * FROM config_candidate_rums_t;
+  3  
+  4  -- All rate plans currently loaded
+  5  SELECT poid_id0, name FROM rate_plan_t;
+  6  
+  7  -- All products
+  8  SELECT poid_id0, name, poid_type FROM product_t;
+  9  
+ 10  -- Custom tables (anything not stock BRM)
+ 11  SELECT table_name FROM all_tables WHERE table_name LIKE '%NAI%' OR table_name LIKE '%G3%' OR table_name LIKE '%CUSTOM%';
+ 12  
+ 13  -- Any custom field definitions
+ 14* SELECT * FROM dd_fields_t WHERE field_id > 9000000 OR field_id BETWEEN 10000 AND 20000;
+
+   OBJ_ID0    REC_ID    REC_ID2 RUM_NAME      QUANTITY_EXPR                                                          UNIT 
+__________ _________ __________ _____________ ___________________________________________________________________ _______ 
+    754350         0          0 Occurrence    1                                                                         0 
+    754350         0          1 Duration      PIN_FLD_END_T-PIN_FLD_START_T                                             1 
+    754350         0          2 Size          PIN_FLD_DIALUP.PIN_FLD_BYTES_IN+PIN_FLD_DIALUP.PIN_FLD_BYTES_OUT         11 
+    754350         0          3 Fold          PIN_FLD_FOLD.PIN_FLD_QUANTITY                                             0 
+    754350         0          4 None          1                                                                         0 
+    754350         0          5 None          1                                                                         0 
+    754350         0          6 None          1                                                                         0 
+    754350         0          7 None          1                                                                         0 
+    754350         0          8 None          1                                                                         0 
+    754350         0          9 None          1                                                                         0 
+    754350         0         10 None          1                                                                         0 
+    754350         0         11 None          1                                                                         0 
+    754350         0         12 None          1                                                                         0 
+    754350         0         13 None          1                                                                         0 
+    754350         0         14 None          1                                                                         0 
+    754350         0         15 None          1                                                                         0 
+    754350         0         16 None          1                                                                         0 
+    754350         0         17 None          1                                                                         0 
+    754350         0         18 None          1                                                                         0 
+    754350         0         19 None          1                                                                         0 
+    754350         0         20 None          1                                                                         0 
+    754350         0         21 None          1                                                                         0 
+    754350         0         22 None          1                                                                         0 
+    754350         0         23 None          1                                                                         0 
+    754350         0         24 None          1                                                                         0 
+    754350         0         25 None          1                                                                         0 
+    754350         0         26 None          1                                                                         0 
+    754350         0         27 None          1                                                                         0 
+    754350         0         28 None          1                                                                         0 
+    754350         0         29 None          1                                                                         0 
+    754350         0         30 None          1                                                                         0 
+    754350         0         31 None          1                                                                         0 
+    754350         0         32 None          1                                                                         0 
+    754350         0         33 None          1                                                                         0 
+    754350         0         34 None          1                                                                         0 
+    754350         0         35 None          1                                                                         0 
+    754350         0         36 None          1                                                                         0 
+    754350         0         37 None          1                                                                         0 
+    754350         0         38 None          1                                                                         0 
+
+   OBJ_ID0    REC_ID    REC_ID2 RUM_NAME    QUANTITY_EXPR       UNIT 
+__________ _________ __________ ___________ ________________ _______ 
+    754350         0         39 None        1                      0 
+    754350         0         40 None        1                      0 
+    754350         0         41 None        1                      0 
+    754350         0         42 None        1                      0 
+    754350         0         43 None        1                      0 
+    754350         0         44 None        1                      0 
+    754350         0         45 None        1                      0 
+    754350         0         46 None        1                      0 
+    754350         0         47 None        1                      0 
+    754350         0         48 None        1                      0 
+    754350         0         49 None        1                      0 
+    754350         0         50 None        1                      0 
+    754350         0         51 None        1                      0 
+    754350         0         52 None        1                      0 
+    754350         0         53 None        1                      0 
+    754350         0         54 None        1                      0 
+    754350         0         55 None        1                      0 
+    754350         0         56 None        1                      0 
+    754350         0         57 None        1                      0 
+    754350         0         58 None        1                      0 
+    754350         0         59 None        1                      0 
+    754350         0         60 None        1                      0 
+    754350         0         61 None        1                      0 
+    754350         0         62 None        1                      0 
+    754350         0         63 None        1                      0 
+    754350         0         64 None        1                      0 
+    754350         0         65 None        1                      0 
+    754350         0         66 None        1                      0 
+    754350         0         67 None        1                      0 
+    754350         0         68 None        1                      0 
+    754350         0         69 None        1                      0 
+    754350         0         70 None        1                      0 
+    754350         0         71 None        1                      0 
+    754350         0         72 None        1                      0 
+    754350         0         73 None        1                      0 
+    754350         0         74 None        1                      0 
+    754350         0         75 None        1                      0 
+    754350         0         76 None        1                      0 
+    754350         0         77 None        1                      0 
+
+   OBJ_ID0    REC_ID    REC_ID2 RUM_NAME    QUANTITY_EXPR       UNIT 
+__________ _________ __________ ___________ ________________ _______ 
+    754350         0         78 None        1                      0 
+    754350         0         79 None        1                      0 
+    754350         0         80 None        1                      0 
+    754350         0         81 None        1                      0 
+    754350         0         82 None        1                      0 
+    754350         0         83 None        1                      0 
+    754350         0         84 None        1                      0 
+    754350         0         85 None        1                      0 
+    754350         0         86 None        1                      0 
+    754350         0         87 None        1                      0 
+    754350         0         88 None        1                      0 
+    754350         0         89 None        1                      0 
+    754350         0         90 None        1                      0 
+    754350         0         91 None        1                      0 
+    754350         0         92 None        1                      0 
+    754350         0         93 None        1                      0 
+    754350         0         94 None        1                      0 
+    754350         0         95 None        1                      0 
+    754350         0         96 None        1                      0 
+    754350         0         97 None        1                      0 
+    754350         0         98 None        1                      0 
+    754350         0         99 None        1                      0 
+    754350         0        100 None        1                      0 
+    754350         0        101 None        1                      0 
+    754350         0        102 None        1                      0 
+    754350         0        103 None        1                      0 
+    754350         0        104 None        1                      0 
+    754350         0        105 None        1                      0 
+    754350         0        106 None        1                      0 
+    754350         0        107 None        1                      0 
+    754350         0        108 None        1                      0 
+    754350         0        109 None        1                      0 
+    754350         0        110 None        1                      0 
+    754350         0        111 None        1                      0 
+    754350         0        112 None        1                      0 
+    754350         0        113 None        1                      0 
+    754350         0        114 None        1                      0 
+    754350         0        115 None        1                      0 
+    754350         0        116 None        1                      0 
+
+   OBJ_ID0    REC_ID    REC_ID2 RUM_NAME                  QUANTITY_EXPR                                                                                        UNIT 
+__________ _________ __________ _________________________ _________________________________________________________________________________________________ _______ 
+    754350         0        117 None                      1                                                                                                       0 
+    754350         0        118 None                      1                                                                                                       0 
+    754350         0        119 None                      1                                                                                                       0 
+    754350         0        120 None                      1                                                                                                       0 
+    754350         0        121 None                      1                                                                                                       0 
+    754350         0        122 None                      1                                                                                                       0 
+    754350         0        123 None                      1                                                                                                       0 
+    754350         0        124 None                      1                                                                                                       0 
+    754350         0        125 None                      1                                                                                                       0 
+    754350         0        126 None                      1                                                                                                       0 
+    754350         0        127 None                      1                                                                                                       0 
+    754350         0        128 None                      1                                                                                                       0 
+    754350         0        129 None                      1                                                                                                       0 
+    754350         0        130 None                      1                                                                                                       0 
+    754350         0        131 None                      1                                                                                                       0 
+    754350         0        132 None                      1                                                                                                       0 
+    754350         0        133 None                      1                                                                                                       0 
+    754350         0        134 None                      1                                                                                                       0 
+    754350         0        135 None                      1                                                                                                       0 
+    754350         0        136 None                      1                                                                                                       0 
+    754350         0        137 None                      1                                                                                                       0 
+    754350         0        138 None                      1                                                                                                       0 
+    754350         0        139 None                      1                                                                                                       0 
+    754350         0        140 None                      1                                                                                                       0 
+    754350         0        141 None                      1                                                                                                       0 
+    754350         0        142 Netflow_categorization    1                                                                                                       0 
+    754350         0        143 Netflow_usage             (PIN_FLD_NETFLOW_USAGE.PIN_FLD_QUANTITY)/1024                                                           0 
+    754350         1        143 Netflow_bandwidth         PIN_FLD_NETFLOW_USAGE.PIN_FLD_QUANTITY                                                                  0 
+    754350         2        143 Netflow_import_usage      (PIN_FLD_NETFLOW_USAGE.PIN_FLD_BYTES)/1024                                                              0 
+    754350         0        144 Number                    1                                                                                                       0 
+    754350         1        144 Usage Time                1                                                                                                       1 
+    754350         2        144 Usage Size                1                                                                                                      11 
+    754350         3        144 Amount                    1                                                                                                       0 
+    754350         0        145 NARUS_Dialup_Usage        (PIN_FLD_NRS_DIALUP_IPDR.PIN_FLD_DURATION_SECONDS)/3600.0                                               0 
+    754350         0        146 Narus_VoIP_Usage          (PIN_FLD_NRS_VOIP_IPDR.PIN_FLD_DURATION_SECONDS)/60.0                                                   0 
+    754350         0        147 NARUS_Flow_Usage          (PIN_FLD_BROADBAND_USAGE.PIN_FLD_BYTES_IN+PIN_FLD_BROADBAND_USAGE.PIN_FLD_BYTES_OUT)/1048576.0          0 
+    754350         1        147 NARUS_Stream_Usage        (PIN_FLD_BROADBAND_USAGE.PIN_FLD_BYTES_IN+PIN_FLD_BROADBAND_USAGE.PIN_FLD_BYTES_OUT)/1048576.0          0 
+    754350         0        148 Size                      (PIN_FLD_GPRS_INFO.PIN_FLD_BYTES_IN+PIN_FLD_GPRS_INFO.PIN_FLD_BYTES_OUT)/1024                          12 
+    754350         1        148 Uplink                    PIN_FLD_GPRS_INFO.PIN_FLD_BYTES_IN/1024                                                                12 
+
+   OBJ_ID0    REC_ID    REC_ID2 RUM_NAME                 QUANTITY_EXPR                                                                                                    UNIT 
+__________ _________ __________ ________________________ _____________________________________________________________________________________________________________ _______ 
+    754350         2        148 DownLink                 PIN_FLD_GPRS_INFO.PIN_FLD_BYTES_OUT/1024                                                                           12 
+    754350         0        149 Size                     PIN_FLD_WAP_INFO.PIN_FLD_BYTES_IN/1024                                                                             12 
+    754350         0        150 Messages                 1                                                                                                                   0 
+    754350         0        151 Content_Usage            PIN_FLD_CONTENT_INFO.PIN_FLD_QUANTITY                                                                               0 
+    754350         0        152 Messages                 PIN_FLD_GSM_INFO.PIN_FLD_NUMBER_OF_UNITS                                                                            0 
+    754350         1        152 Size                     (PIN_FLD_GSM_INFO.PIN_FLD_BYTES_IN+PIN_FLD_GSM_INFO.PIN_FLD_BYTES_OUT)/1024                                        12 
+    754350         2        152 Uplink                   PIN_FLD_GSM_INFO.PIN_FLD_BYTES_IN/1024                                                                             12 
+    754350         3        152 DownLink                 PIN_FLD_GSM_INFO.PIN_FLD_BYTES_OUT/1024                                                                            12 
+    754350         0        153 Messages                 PIN_FLD_GSM_INFO.PIN_FLD_NUMBER_OF_UNITS                                                                            0 
+    754350         1        153 Size                     (PIN_FLD_GSM_INFO.PIN_FLD_BYTES_IN+PIN_FLD_GSM_INFO.PIN_FLD_BYTES_OUT)                                             11 
+    754350         2        153 Uplink                   PIN_FLD_GSM_INFO.PIN_FLD_BYTES_IN                                                                                  11 
+    754350         3        153 DownLink                 PIN_FLD_GSM_INFO.PIN_FLD_BYTES_OUT                                                                                 11 
+    754350         0        154 Amount                   PIN_FLD_FAILED_PAYMENT_FEE.PIN_FLD_AMOUNT_ORIGINAL_PAYMENT                                                          0 
+    754350         0        155 Current Bill Total       PIN_FLD_INCENTIVE.PIN_FLD_CURRENT_TOTAL                                                                             0 
+    754350         1        155 Last Bill Total          PIN_FLD_INCENTIVE.PIN_FLD_PREVIOUS_TOTAL                                                                            0 
+    754350         0        156 Volume                   (PIN_FLD_TELCO_INFO.PIN_FLD_BYTES_UPLINK+PIN_FLD_TELCO_INFO.PIN_FLD_BYTES_DOWNLINK)                                11 
+    754350         1        156 VolumeUpLoad             PIN_FLD_TELCO_INFO.PIN_FLD_BYTES_UPLINK                                                                            11 
+    754350         2        156 VolumeDownLoad           PIN_FLD_TELCO_INFO.PIN_FLD_BYTES_DOWNLINK                                                                          11 
+    754350         3        156 Dropped_Call_Quantity    0                                                                                                                   1 
+    754350         0        157 Topup_Charge             PIN_FLD_TOPUP_RESOURCE_INFO.PIN_FLD_TOPUP_AMT                                                                       0 
+    754350         0        158 Loan_Amount              PIN_FLD_LOAN_INFO.PIN_FLD_AMOUNT                                                                                    0 
+    754350         0        159 Loan_Amount              PIN_FLD_LOAN_INFO.PIN_FLD_AMOUNT                                                                                    0 
+    754350         1        159 Outstanding_Amount       PIN_FLD_LOAN_INFO.PIN_FLD_OUTSTANDING                                                                               0 
+    754350         0        160 Loan_Amount              PIN_FLD_LOAN_INFO.PIN_FLD_AMOUNT                                                                                    0 
+    754350         0        161 Prompt_G1                1                                                                                                                   0 
+    754350         1        161 Tokens_G1                (PIN_FLD_NEXTAI_USAGE_G1.PIN_FLD_INPUT_TOKENS_G1+PIN_FLD_NEXTAI_USAGE_G1.PIN_FLD_OUTPUT_TOKENS_G1)/1000             0 
+    754350         0        162 Prompt_NAI3              1                                                                                                                   0 
+    754350         1        162 Tokens_NAI3              (PIN_FLD_INFO_NAI3.PIN_FLD_INPUT_TOKENS_NAI3+PIN_FLD_INFO_NAI3.PIN_FLD_OUTPUT_TOKENS_NAI3)/1000                     0 
+    754350         0        163 Prompt_Team2             1                                                                                                                   0 
+    754350         1        163 Token_Team2              (PIN_FLD_NEXTAI_T2.PIN_FLD_IN_TOKENS_T2+PIN_FLD_NEXTAI_T2.PIN_FLD_OUT_TOKENS_T2)/1000                               0 
+    754350         0        164 PromptG6                 1                                                                                                                   0 
+    754350         1        164 TokensG6                 (PIN_FLD_SESSION_USAGE_G6.PIN_FLD_INPUT_TOKENS2_G6+PIN_FLD_SESSION_USAGE_G6.PIN_FLD_OUTPUT_TOKENS_G6)/1000          0 
+    754350         0        165 PromptG05                1                                                                                                                   0 
+    754350         1        165 TokensG05                PIN_FLD_QUANTITY                                                                                                    0 
+    754350         0        166 Prompt_G4                1                                                                                                                   0 
+    754350         1        166 Token_G4                 (PIN_FLD_SESSION_USAGE_G4.PIN_FLD_INPUT_TOKENS_G4+PIN_FLD_SESSION_USAGE_G4.PIN_FLD_OUTPUT_TOKENS_G4)/1000           0 
+
+192 rows selected. 
+
+
+   POID_ID0 NAME                                      
+___________ _________________________________________ 
+     377915 Purchase Fee Event                        
+     394016 Monthly Cycle Forward Event               
+     395040 Remittance Event                          
+     396880 NAI-G3-O3-Unlimited-Prompt-Cycle          
+     462715 NAI-G3-O3-Monthly-2500k-Cycle             
+     853572 NAI-G3-O3-PAYG-Token-Usage                
+     702365 Monthly Cycle Forward Event               
+     700509 NextAI Session Usage G6                   
+     709366 NextAI G4 Usage Event                     
+     710830 Monthly Cycle Forward Event               
+     711854 NextAI G4 Usage Event                     
+     719652 nextai usage event                        
+     716964 nextai usage event                        
+     729316 Monthly Cycle Forward Event               
+     732388 Monthly Cycle Forward Event               
+     731876 NextAI Session Usage G6                   
+     729572 NextAI Session Usage G6                   
+     751607 Monthly Cycle Forward Event               
+     749583 nextai usage event                        
+     845799 NAI-G3-O3-Monthly-200k-Usage              
+     848423 NextAI Session Usage G6                   
+     851877 G05_Od3_Token_200KInc_Overage_RP          
+     380601 Oddisey 3 Prompt Usage Engine             
+     380345 Oddisey 3 Prompt Monthly Fee & Grant      
+     380281 Purchase Fee Event                        
+     398173 Oddisey 3 Prompt Usage Engine             
+     397533 Oddisey 3 Prompt Monthly Fee & Grant      
+     397407 Oddisey 3.5 Prompt Usage Engine           
+     397919 Oddisey 3.5 Prompt Monthly Fee & Grant    
+     399613 NAI-G3-O3-Monthly-100p-Cycle              
+     400637 NAI-G3-O3-Monthly-100p-Usage              
+     409228 Oddisey 3 Prompt Usage Engine             
+     407948 Oddisey 3 Prompt Monthly Fee & Grant      
+     406412 Oddisey 3 Prompt Monthly Fee & Grant      
+     409484 Oddisey 3 Prompt Usage Engine             
+     595482 Oddisey 3 Token Usage Engine              
+     704190 G05_Od35_Prompt_PAYG_RP                   
+     701886 G05_Od35_Prompt_100Inc_Monthly_RP         
+     701374 G05_Od35_Prompt_100Inc_Overage_RP         
+
+   POID_ID0 NAME                                      
+___________ _________________________________________ 
+     594202 Oddisey 3 Token Monthly Fee & Grant       
+     597786 Oddisey 3 Token Usage Engine              
+     596122 Oddisey 3 Token Monthly Fee & Grant       
+     596378 Oddisey 3.5 Token Usage Engine            
+     597402 Oddisey 3.5 Token Monthly Fee & Grant     
+     595034 Oddisey 3.5 Token Usage Engine            
+     594522 Oddisey 3.5 Token Monthly Fee & Grant     
+     597338 Oddisey 3.5 Token Usage Engine            
+     704446 G05_Od35_Prompt_Unlimited_RP              
+     701566 G05_Od35_Token_PAYG_RP                    
+     703102 G05_Od35_Token_200KInc_Monthly_RP         
+     704126 NextAI G05 Session Usage Event            
+     701822 G05_Od35_Token_2500KInc_Monthly_RP        
+     701310 G05_Od35_Token_2500KInc_Overage_RP        
+     723012 Monthly Cycle Forward Event               
+     724036 nextai usage event                        
+     730166 NextAI Session Usage G6                   
+     853350 NAI-G3-O3-Monthly-2500k-Usage             
+     373862 Purchase Fee Event                        
+     627591 NextAI G3 Usage Event                     
+     630663 NextAI G3 Usage Event                     
+     395425 Oddisey 3.5 Prompt Usage Engine           
+     395937 Oddisey 3.5 Prompt Monthly Fee & Grant    
+     393315 NAI-G3-O3-Unlimited-Token-Cycle           
+     394339 NAI-G3-O3-Unlimited-Token-Usage           
+     628807 Monthly Cycle Forward Event               
+     726989 Monthly Cycle Forward Event               
+     696897 G05_Od3_Prompt_100Inc_Overage_RP          
+     697921 G05_Od3_Prompt_100Inc_Monthly_RP          
+     698689 G05_Od3_Prompt_PAYG_RP                    
+     697153 G05_Od3_Token_2500KInc_Overage_RP         
+     725037 NextAI Session Usage G6                   
+     728109 Monthly Cycle Forward Event               
+     712117 NextAI G3 Usage Event                     
+     711436 NextAI Session Usage G6                   
+     708748 Monthly Cycle Forward Event               
+     711148 NextAI G4 Usage Event                     
+     712684 NextAI G4 Usage Event                     
+     708559 NextAI G4 Usage Event                     
+
+   POID_ID0 NAME                            
+___________ _______________________________ 
+     705583 Monthly Cycle Forward Event     
+     705071 NextAI G4 Usage Event           
+     707869 Monthly Cycle Forward Event     
+     710701 NextAI G4 Usage Event           
+     712220 Monthly Cycle Forward Event     
+     710940 NextAI G4 Usage Event           
+     707229 Monthly Cycle Forward Event     
+     708253 NextAI G4 Usage Event           
+     727597 NextAI Session Usage G6         
+     753015 nextai usage event              
+     751479 Monthly Cycle Forward Event     
+     749815 nextai usage event              
+     752887 Monthly Cycle Forward Event     
+     751351 nextai usage event              
+     309891 cycle_forward_monthly           
+     309635 Internet Usage Fee              
+     308099 cycle_forward_monthly           
+     307267 purchase                        
+     310339 cycle_forward_monthly           
+     308803 cycle_forward_monthly           
+     309571 cycle_forward_quarterly         
+     365934 NAI-G03-FlatRate-Cycle          
+     365422 NAI-G03-FlatRate-Usage          
+     365038 NAI-G03-Monthly-Cycle           
+     366062 NAI-G03-Monthly-Usage           
+     375687 Monthly Cycle Forward Event     
+     376711 Session Event                   
+     400892 NAI-G3-O3-Monthly-200k-Cycle    
+     625301 NextAI G3 Usage Event           
+     622997 NextAI G3 Usage Event           
+     624021 Monthly Cycle Forward Event     
+     700416 NextAI G3 Usage Event           
+     703488 NextAI G3 Usage Event           
+     702976 Monthly Cycle Forward Event     
+     700672 Monthly Cycle Forward Event     
+     728248 Monthly Cycle Forward Event     
+     727736 nextai usage event              
+     725432 Monthly Cycle Forward Event     
+     728504 Monthly Cycle Forward Event     
+
+   POID_ID0 NAME                                      
+___________ _________________________________________ 
+     727992 nextai usage event                        
+     731121 G05_Od3_Token_PAYG_RP                     
+     730121 G05_Od3_Token_2500kInc_Monthly_RP         
+     730633 G05_Od3_Token_200kInc_Overage_RP          
+     730377 G05_Od3_Prompt_Unlimited_Monthly_RP       
+     729865 G05_Od3_Prompt_Unlimited_Free_RP          
+     731273 G05_Od3_Prompt_100Inc_Overage_RP          
+     732297 G05_Od3_Prompt_100Inc_Monthly_RP          
+     730313 G05_Od35_Prompt_Unlimited_Free_RP         
+     739344 nextai usage event                        
+     737808 Monthly Cycle Forward Event               
+     738832 nextai usage event                        
+     370932 NAI-G03-PAYG-Usage                        
+     398209 NAI-G3-O3-PAYG-Prompt-Usage               
+     628518 NextAI G3 Usage Event                     
+     628902 NextAI G3 Usage Event                     
+     406542 Oddisey 3.5 Prompt Usage Engine           
+     406030 Oddisey 3.5 Prompt Monthly Fee & Grant    
+     409102 Oddisey 3.5 Prompt Monthly Fee & Grant    
+     629926 Monthly Cycle Forward Event               
+     628838 Monthly Cycle Forward Event               
+     712247 NextAI G4 Usage Event                     
+     710967 Monthly Cycle Forward Event               
+     715732 Monthly Cycle Forward Event               
+     721478 Monthly Cycle Forward Event               
+     468392 Oddisey 3.5 Prompt Usage Engine           
+     713780 NextAI G4 Usage Event                     
+     715316 Monthly Cycle Forward Event               
+     468584 Oddisey 3.5 Prompt Usage Engine           
+     733331 Monthly Cycle Forward Event               
+     734355 NextAI G3 Usage Event                     
+     737171 Monthly Cycle Forward Event               
+     468840 Oddisey 3 Prompt Usage Engine             
+     735315 NextAI G3 Usage Event                     
+     739600 Monthly Cycle Forward Event               
+     738064 nextai usage event                        
+     741136 Monthly Cycle Forward Event               
+     739472 nextai usage event                        
+     737936 Monthly Cycle Forward Event               
+
+   POID_ID0 NAME                           
+___________ ______________________________ 
+     738960 nextai usage event             
+     735539 NextAI Session Usage G6        
+     734003 NextAI Session Usage G6        
+     735027 Monthly Cycle Forward Event    
+     735411 Monthly Cycle Forward Event    
+     736435 NextAI Session Usage G6        
+     752119 Monthly Cycle Forward Event    
+     753143 nextai usage event             
+
+164 rows selected. 
+
+
+   POID_ID0 NAME                                                         POID_TYPE    
+___________ ____________________________________________________________ ____________ 
+          1 Default System Product                                       /product     
+     376891 product buy1                                                 /product     
+     394528 Product Oddisey 3 Group 2 Demo                               /product     
+     395856 NAI-G3-O3-Unlimited-Prompt                                   /product     
+     461691 NAI-G3-O3-Monthly-2500k-Token                                /product     
+     701341 Oddisey 3.0 10 USD                                           /product     
+     709878 Odyssey 3.0 G4 Pay as you go                                 /product     
+     712494 Odyssey 3.0 G4 ($200/m)                                      /product     
+     720164 Odissey 3.0 - Pay as you go (Prompt)  - Team 2               /product     
+     718628 Odissey 3.0 - Pay as you go (Token)  - Team 2                /product     
+     730980 NextAI Oddisey 3.5 120 USD Monthly Group 6                   /product     
+     731364 NextAI Oddisey 3.5 15 USD Monthly Group 6                    /product     
+     730852 NextAI Oddisey 3.5 PAYG Group 6                              /product     
+     379257 product 1 payment                                            /product     
+     399709 Product Oddisey 3 Token-based Group 1                        /product     
+     400223 Product Oddisey 3.5 Prompt-based Group 1                     /product     
+     401277 NAI-G3-O3-Monthly-100-Prompt                                 /product     
+     408204 Product Oddisey 3 Prompt 10USD Tier Group 1                  /product     
+     406924 Product Oddisey 3 Prompt 100USD Unlimited Group 1            /product     
+     408460 Product Oddisey 3 Token PAYG Group 1                         /product     
+     405580 Product Oddisey 3 Token 20USD Tier Group 1                   /product     
+     408140 Product Oddisey 3 Token 200USD Tier Group 1                  /product     
+     703166 G05_Od35_Prompt_PAYG_Product                                 /product     
+     700862 G05_Od35_Prompt_100Inc_Product                               /product     
+     703422 G05_Od35_Prompt_Unlimited_Product                            /product     
+     700542 G05_Od35_Token_PAYG_Product                                  /product     
+     703614 G05_Od35_Token_200KInc_Product                               /product     
+     700798 G05_Od35_Token_2500KInc_Product                              /product     
+     724868 Odissey 3.0 - $200 monthly fee with 2500k tokens - Team 2    /product     
+     352664 Product Oddisey 3 Prompt-based Group 1                       /product     
+     354712 Oddisey 3.5 Group 1                                          /product     
+     372838 the goat s test product                                      /product     
+     394049 Product Oddisey 3.5 Token-based Group 1                      /product     
+     394627 Product Oddisey 3 Prompt PAYG Group 1                        /product     
+     394801 NAI-G3-O3-PAYG-Token                                         /product     
+     395171 NAI-G3-O3-Unlimited-Token                                    /product     
+     628103 Product Odyssey 3.5 pay as you go Group 3                    /product     
+     629639 Product Odyssey 3.5 monthly fee with included Group 3        /product     
+     697217 G05_Od3_Token_PAYG_Product                                   /product     
+
+   POID_ID0 NAME                                                          POID_TYPE    
+___________ _____________________________________________________________ ____________ 
+     700289 G05_Od3_Prompt_Unlimited_Product                              /product     
+     697409 G05_Od3_Prompt_100Inc_Product                                 /product     
+     699969 G05_Od3_Prompt_PAYG_Product                                   /product     
+     697665 G05_Od3_Token_2500KInc_Product                                /product     
+     700225 G05_Od3_Token_200KInc_Product                                 /product     
+     711093 NAI-G3-O3.5-Product Odyssey 3.5 pay as you go T               /product     
+     711948 Oddisey 3.0 Pay as You Go Group 6                             /product     
+     710412 Odyssey 3.0 monthly fee unlimited Group 6                     /product     
+     712428 Odyssey 3.0 G4 Pay as you go (Prompt)                         /product     
+     707535 Odyssey 3.5 G4 Pay as you go (Prompt)                         /product     
+     704559 Odyssey 3.5 G4 ($15/m)                                        /product     
+     706845 Odyssey 3.5 G4 ($120/m)                                       /product     
+     712653 Odyssey 3.5 G4 Pay as you go (Token)                          /product     
+     711196 Odyssey 3.5 G4 ($40/m)                                        /product     
+     707741 Odyssey 3.5 G4 ($400/m)                                       /product     
+     727501 NextAI Oddisey 3.0 PAYG Token Group 6                         /product     
+     725965 NextAI Oddisey 3.0 20USD Monthly Token Group 6                /product     
+     727085 NextAI Oddisey 3.0 200 USD Monthly Token Group 6              /product     
+     751991 Oddisey 3.5 - Pay as you go (Prompt) - T2                     /product     
+     310403 Product 1a - Internet Access                                  /product     
+     308611 Product 1b - Email Account                                    /product     
+     310147 Product 2a - Internet Access with Free Period                 /product     
+     307779 Product 2b - Email Account, No Fees                           /product     
+     310851 Product 3a - Pre-Paid Internet Service with Free Period       /product     
+     364910 NAI-G03-FlatRate-Product                                      /product     
+     366318 NAI-G03-Monthly-Product                                       /product     
+     376199 the goat's testing service product                            /product     
+     399868 NAI-G3-O3-Monthly-200k-Token                                  /product     
+     625813 Odyssey 3.5 pay as you go Group 3                             /product     
+     624277 Odyssey 3.5 monthly fee with included Group 3                 /product     
+     698367 NAI-G3-O3.5-Product Odyssey 3.5 pay as you go                 /product     
+     702464 NAI-G3-O3.5-Product Odyssey 3.5 monthly fee with included     /product     
+     701952 NAI-G3-O3.5-Product Odyssey 3.5 monthly fee unlimited         /product     
+     727224 Odissey 3.0 - $20 monthly with 200k tokens  - Team 2          /product     
+     726712 Odissey 3.0 - $100 monthly with unlimited prompts - Team 2    /product     
+     727480 Odissey 3.0 - $10 monthly with 100 prompt  - Team 2           /product     
+     732937 G05_Od3_Prompt_100Inc_Product(2)                              /product     
+     741344 Oddisey 3.0 - Pay as you go (Prompt) - T2                     /product     
+     738320 Oddisey 3.0 - $10 monthly with 100 Prompt - T2                /product     
+
+   POID_ID0 NAME                                                              POID_TYPE    
+___________ _________________________________________________________________ ____________ 
+     740880 Oddisey 3.0 - $100 monthly with unlimited prompts - T2            /product     
+     738576 Oddisey 3.0 - Pay as you go (Token) - T2                          /product     
+     740112 Oddisey 3.0 - $20 monthly with 200k Tokens - T2                   /product     
+     738448 Oddisey 3.0 - $200 monthly with 2500k Tokens - T2                 /product     
+     750455 Oddisey 3.5 - $15 monthly with 100 Prompt - T2                    /product     
+     751863 Oddisey 3.5 - $120 monthly with unlimited prompts - T2            /product     
+     750327 Oddisey 3.5 - Pay as you go (Token) - T2                          /product     
+     372596 NAI-G03-PAYG-Product                                              /product     
+     398721 NAI-G3-O3-PAYG-Prompt                                             /product     
+     409078 Product Oddisey 3.5 Prompt PAYG Group 1                           /product     
+     405518 Product Oddisey 3.5 Prompt 15USD Tier Group 1                     /product     
+     408078 Product Oddisey 3.5 Prompt 120USD Unlimited Group 1               /product     
+     405774 Product Oddisey 3.5 Token PAYG Group 1                            /product     
+     408334 Product Oddisey 3.5 Token 40USD Tier Group 1                      /product     
+     406670 Product Oddisey 3.5 Token 400USD Tier Group 1                     /product     
+     627494 Odyssey 3.5 pay as you go                                         /product     
+     630566 Odyssey 3.5 monthly fee with included                             /product     
+     630694 Product Odyssey 3.5 monthly fee unlimited Group 3                 /product     
+     711223 Odyssey 3.0 G4 ($10/m)                                            /product     
+     716244 Odyssey 3.0 G4 ($100/m)                                           /product     
+     712756 Odyssey 3.0 G4 Pay as you go (Token)                              /product     
+     715828 Oddisey 3.0 G4 ($20/m)                                            /product     
+     721990 Oddisey 3.0 10 USD Monthly                                        /product     
+     734995 NAI-G3-O3.5-Plan Odyssey 3.5 monthly fee with included T          /product     
+     736147 NAI-G3-O3.5-Plan Odyssey 3.5 monthly fee with included extra T    /product     
+     736819 NextAI Oddisey 3.5 PAYG Token Group 6                             /product     
+     734515 NextAI Oddisey 3.5 40USD Monthly Token Group 6                    /product     
+     737075 NextAI Oddisey 3.5 400USD Monthly Token Group 6                   /product     
+     753399 Oddisey 3.5 - $40 monthly with 200k Tokens - T2                   /product     
+     750583 Oddisey 3.5 - $400 monthly with 2500k Tokens - T2                 /product     
+
+108 rows selected. 
+
+
+TABLE_NAME                       
+________________________________ 
+CONFIG_CUSTOMER_SEGMENT_T        
+E$IAU_CUSTOM_01                  
+EVENT_CUSTOMER_ACTGINFO_T        
+EVENT_CUSTOMER_BILLINFO_T        
+EVENT_CUSTOMER_LOCALE_T          
+EVENT_CUSTOMER_LOGIN_T           
+EVENT_CUSTOMER_LOGIN_ALIAS_T     
+EVENT_CUSTOMER_NAMEINFO_T        
+EVENT_CUSTOMER_PHONES_T          
+EVENT_CUSTOMER_NOTE_T            
+EVENT_CUSTOMER_NOTE_DATA_T       
+EVENT_CUSTOMER_PASSWORD_T        
+EVENT_CUSTOMER_STATUSES_T        
+JOB_TEMPLATE_CUSTOM_INFO_T       
+PROFILE_CUSTOMER_CARE_T          
+AU_JOB_TEMPLATE_CUSTOM_INFO_T    
+AU_PROFILE_CUSTOMER_CARE_T       
+E$IAU_CUSTOM                     
+CUSTOMERATTRIBUTESPEC            
+E$IAU_CUSTOM                     
+BCCUSTOMANALYZERRULE             
+E$IAU_CUSTOM_01                  
+CUSTOMANALYZERRULE_SPEC          
+CUSTOMTRIGGEREXPRESSION          
+CUSTOMEXPRESSION                 
+CUSTOMANALYZERRULE               
+CUSTOMALTERATIONBASISEXPR        
+ABCCUSTOMRULEEXPRESSION          
+CUSTOMRULE                       
+BCCUSTOMERATTRIBUTESPEC          
+ACUSTOMRULEEXPRESSION            
+CUSTOMERSPECPACKAGEITEM          
+CUSTOMALTERATIONTBEXPR           
+XREF_BRE_CUSTOMFIELD             
+EVENT_CUSTOMER_PHONES_T          
+EVENT_CUSTOMER_NOTE_T            
+EVENT_CUSTOMER_STATUSES_T        
+EVENT_CUSTOMER_LOCALE_T          
+EVENT_CUSTOMER_LOGIN_T           
+
+TABLE_NAME                        
+_________________________________ 
+AU_JOB_TEMPLATE_CUSTOM_INFO_T     
+EVENT_CUSTOMER_BILLINFO_T         
+EVENT_CUSTOMER_PASSWORD_T         
+EVENT_CUSTOMER_LOGIN_ALIAS_T      
+EVENT_CUSTOMER_ACTGINFO_T         
+EVENT_CUSTOMER_NOTE_DATA_T        
+EVENT_CUSTOMER_NAMEINFO_T         
+PROFILE_CUSTOMER_CARE_T           
+AU_PROFILE_CUSTOMER_CARE_T        
+JOB_TEMPLATE_CUSTOM_INFO_T        
+CONFIG_CUSTOMER_SEGMENT_T         
+S_NQ_DSS_CUSTOM_ATTRS             
+MLOG$_IAU_CUSTOM                  
+MLOG$_IAU_CUSTOM_01               
+IAU_CUSTOM_01                     
+IAU_CUSTOM                        
+S_NQ_DSS_DATASET_CUSTOM           
+S_NQ_DSS_CUSTOM_ATTRS_TMP         
+S_NQ_DSS_CUSTOMIZATION_TYPES      
+S_NQ_DSS_DATASET_CUSTOMIZATION    
+AU_SERVICE_NEXTAIG3_T             
+SERVICE_NEXTAIG3_T                
+SERVICE_NEXTAIG3_ARGS_T           
+AU_SERVICE_NEXTAIG3_ARGS_T        
+USAGE_INFO_NAI3_T                 
+EVENT_SESSION_USAGEG3_T           
+
+65 rows selected. 
+
+
+Error starting at line : 1 in command -
+SELECT * FROM dd_fields_t WHERE field_id > 9000000 OR field_id BETWEEN 10000 AND 20000
+Error at Command Line : 1 Column : 55
+Error report -
+SQL Error: ORA-00904: "FIELD_ID": invalid identifier
+
+https://docs.oracle.com/error-help/db/ora-00904/00904. 00000 -  "%s: invalid identifier"
+*Cause:    The identifier or column name entered was invalid.
+*Action:   Ensure the following
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00904/
+SQL> 
+SQL> SELECT column_name FROM all_tab_columns WHERE table_name = 'DD_FIELDS_T';
+
+COLUMN_NAME
+______________
+OBJ_ID0
+REC_ID
+FIELD_NAME
+FIELD_NUM
+FIELD_TYPE
+DESCR
+STATUS
+OBJ_ID0
+REC_ID
+FIELD_NAME
+FIELD_NUM
+FIELD_TYPE
+DESCR
+STATUS
+
+14 rows selected.
+
+SQL> -- Custom fields (your G3/NAI fields live above the stock range, typically 10000+)
+  2  SELECT field_num, field_name, field_type, descr
+  3  FROM dd_fields_t
+  4  WHERE field_num BETWEEN 10000 AND 20000
+  5* ORDER BY field_num;
+
+   FIELD_NUM FIELD_NAME                               FIELD_TYPE DESCR
+____________ _____________________________________ _____________ __________________________________________________________________________
+       10000 ID                                                1
+       10001 PIN_FLD_IDGROUP04                                 7
+       10002 PIN_FLD_ID                                        1
+       10003 PIN_FLD_INPUT_TOKENS_GROUP_1                      1
+       10004 PIN_FLD_SESSION_USAGE_GROUP_1                     9
+       10005 PIN_FLD_INPUT_TOKENS                              1
+       10006 PIN_FLD_OUTPUT_TOKENS                             1
+       10007 PIN_FLD_PROMPT_TEXT                               5
+       10008 PIN_FLD_MODEL_CODE                                5
+       10009 PIN_FLD_MODELTYPE_NAI3                            3 Model type tracks which Odyssey model (3.0 vs 3.5) per service (group3)
+       10010 PIN_FLD_SERVICE_NEXTAIG3                         10 Substruct to hold NextAI group 3 specific information
+       10011 PIN_FLD_SESSION_REF_NAIG3                         5 Store an external session correlation ID group 3
+       10012 PIN_FLD_INFO_NAI3                                10
+       10013 PIN_FLD_INPUT_TOKENS_NAI3                         1
+       10014 PIN_FLD_OUTPUT_TOKENS_NAI3                        1
+       10015 PIN_FLD_PROMPT_NAI3                               5
+       10016 PIN_FLD_TEST                                      1
+       10016 PIN_FLD_GR1                                       1
+       10017 PIN_FLD_TEST_FLD_GROUP1                           9
+       10018 PIN_FLD_TEST_6                                    9
+       10019 PIN_FLD_GR04_TEST                                 5
+       10020 PIN_FLD_SUBS_SESSION_USAGE_GROUP_1               10
+       10021 PIN_FLD_SESSION_USAGE_GROUP1                     10
+       10022 PIN_FLD_INPUT_TOKENS_G1                           1 input tokens
+       10023 PIN_FLD_OUTPUT_TOKENS_G1                          1
+       10024 PIN_FLD_PROMPT_TEXT_G1                            5
+       10025 PIN_FLD_MODEL_CODE_G1                             5
+       10026 PIN_FLD_NEXTAI_USAGE_G1                          10
+       10027 PIN_FLD_INPUT_TOKENS_G4                           1 Input tokens
+       10028 PIN_FLD_SESSION_USAGE_G4                         10
+       10029 PIN_FLD_OUTPUT_TOKENS_G4                          1
+       10030 PIN_FLD_MODEL_CODE_G4                             5
+       10031 PIN_FLD_PROMPT_TXT_G4                             5
+       10032 PIN_FLD_TRANS_ID_G4                               5
+       10033 PIN_FLD_NEXTAIV2_G2_J                             9
+       10034 PIN_FLD_MODEL_CODEV2_G2                           9
+       10035 PIN_FLD_DODEL_CODEV2_G2_J                         9
+       10036 PIN_FLD_MODEL_CODEV2_G2_J                         9
+       10037 PIN_FLD_PROMPT_TXT_G2_J                           9
+
+   FIELD_NUM FIELD_NAME                      FIELD_TYPE DESCR
+____________ ____________________________ _____________ _______________________________________________________________________
+       10038 PIN_FLD_TOKENS_IN_G2_J                   9
+       10039 PIN_FLD_TOKENS_OUT_G2_J                  9
+       10040 PIN_FLD_USAGE_GROUP6                     9
+       10041 PIN_FLD_SESSION_USAGE_G6                10
+       10042 PIN_FLD_TRANSACTION_ID_G6                5
+       10043 PIN_FLD_PROMPT_TXT_G6                    5
+       10044 PIN_FLD_OUTPUT_TOKENS_G6                 1
+       10045 PIN_FLD_INPUT_TOKENS_G6                  5
+       10046 PIN_FLD_MODEL_CODE_G6                    5
+       10047 PIN_FLD_INPUT_TOKENS2_G6                 1
+       10501 PIN_FLD_INPUT_TOKENS_G05                 1 G05 input tokens
+       10502 PIN_FLD_OUTPUT_TOKENS_G05                1 G05 NextAI usage substruct
+       10503 PIN_FLD_TOTAL_TOKENS_G05                 1 G05 total token count used for rating and charging.
+       10504 PIN_FLD_PROMPT_TEXT_G05                  5 G05 prompt text submitted by the customer.
+       10505 PIN_FLD_MODEL_CODE_G05                   7 G05 AI model code used for the usage session.
+       10506 PIN_FLD_TRANS_ID_G05                     5 G05 transaction identifier for tracking the usage event.
+       10507 PIN_FLD_NEXTAI_USAGE_G05                10 G05 NextAI usage substruct containing token and model usage details.
+       10508 PIN_FLD_MODEL_NAME_G05                   5 G05 AI model name/code used for the usage session.
+       10984 PIN_FLD_TOKENS_OUT_GROUP2                1
+
+58 rows selected.
+
+SQL> -- Sanity check: see the full range distribution so we know what "custom" actually means on this server
+  2  SELECT TRUNC(field_num, -3) AS field_range, COUNT(*)
+  3  FROM dd_fields_t
+  4  GROUP BY TRUNC(field_num, -3)
+  5* ORDER BY field_range;
+
+   FIELD_RANGE    COUNT(*)
+______________ ___________
+         10000          58
+        100000          14
+        300000           6
+        500000           6
+        800000           4
+        900000           5
+      10001000           1
+
+7 rows selected.
+
+SQL>
+
+SQL> SELECT poid_id0, name FROM rate_plan_t WHERE name LIKE '%NAI%' OR name LIKE '%G3%';
+  2  SELECT poid_id0, name, poid_type FROM product_t WHERE name LIKE '%NAI%' OR name LIKE '%G3%';
+  3* SELECT table_name FROM all_tables WHERE table_name LIKE '%NAI%' OR table_name LIKE '%G3%' OR table_name LIKE '%CUSTOM%';
+
+   POID_ID0 NAME
+___________ ___________________________________
+     396880 NAI-G3-O3-Unlimited-Prompt-Cycle
+     462715 NAI-G3-O3-Monthly-2500k-Cycle
+     853572 NAI-G3-O3-PAYG-Token-Usage
+     845799 NAI-G3-O3-Monthly-200k-Usage
+     399613 NAI-G3-O3-Monthly-100p-Cycle
+     400637 NAI-G3-O3-Monthly-100p-Usage
+     853350 NAI-G3-O3-Monthly-2500k-Usage
+     627591 NextAI G3 Usage Event
+     630663 NextAI G3 Usage Event
+     393315 NAI-G3-O3-Unlimited-Token-Cycle
+     394339 NAI-G3-O3-Unlimited-Token-Usage
+     712117 NextAI G3 Usage Event
+     365934 NAI-G03-FlatRate-Cycle
+     365422 NAI-G03-FlatRate-Usage
+     365038 NAI-G03-Monthly-Cycle
+     366062 NAI-G03-Monthly-Usage
+     400892 NAI-G3-O3-Monthly-200k-Cycle
+     625301 NextAI G3 Usage Event
+     622997 NextAI G3 Usage Event
+     700416 NextAI G3 Usage Event
+     703488 NextAI G3 Usage Event
+     370932 NAI-G03-PAYG-Usage
+     398209 NAI-G3-O3-PAYG-Prompt-Usage
+     628518 NextAI G3 Usage Event
+     628902 NextAI G3 Usage Event
+     734355 NextAI G3 Usage Event
+     735315 NextAI G3 Usage Event
+
+27 rows selected.
+
+
+   POID_ID0 NAME                                                              POID_TYPE
+___________ _________________________________________________________________ ____________
+     395856 NAI-G3-O3-Unlimited-Prompt                                        /product
+     461691 NAI-G3-O3-Monthly-2500k-Token                                     /product
+     401277 NAI-G3-O3-Monthly-100-Prompt                                      /product
+     394801 NAI-G3-O3-PAYG-Token                                              /product
+     395171 NAI-G3-O3-Unlimited-Token                                         /product
+     711093 NAI-G3-O3.5-Product Odyssey 3.5 pay as you go T                   /product
+     364910 NAI-G03-FlatRate-Product                                          /product
+     366318 NAI-G03-Monthly-Product                                           /product
+     399868 NAI-G3-O3-Monthly-200k-Token                                      /product
+     698367 NAI-G3-O3.5-Product Odyssey 3.5 pay as you go                     /product
+     702464 NAI-G3-O3.5-Product Odyssey 3.5 monthly fee with included         /product
+     701952 NAI-G3-O3.5-Product Odyssey 3.5 monthly fee unlimited             /product
+     372596 NAI-G03-PAYG-Product                                              /product
+     398721 NAI-G3-O3-PAYG-Prompt                                             /product
+     734995 NAI-G3-O3.5-Plan Odyssey 3.5 monthly fee with included T          /product
+     736147 NAI-G3-O3.5-Plan Odyssey 3.5 monthly fee with included extra T    /product
+
+16 rows selected.
+
+
+TABLE_NAME
+________________________________
+PROFILE_CUSTOMER_CARE_T
+AU_PROFILE_CUSTOMER_CARE_T
+XREF_BRE_CUSTOMFIELD
+S_NQ_DSS_CUSTOMIZATION_TYPES
+AU_JOB_TEMPLATE_CUSTOM_INFO_T
+PROFILE_CUSTOMER_CARE_T
+AU_PROFILE_CUSTOMER_CARE_T
+JOB_TEMPLATE_CUSTOM_INFO_T
+E$IAU_CUSTOM_01
+E$IAU_CUSTOM
+E$IAU_CUSTOM
+E$IAU_CUSTOM_01
+EVENT_CUSTOMER_ACTGINFO_T
+EVENT_CUSTOMER_BILLINFO_T
+EVENT_CUSTOMER_LOCALE_T
+EVENT_CUSTOMER_LOGIN_T
+EVENT_CUSTOMER_LOGIN_ALIAS_T
+EVENT_CUSTOMER_NAMEINFO_T
+EVENT_CUSTOMER_PHONES_T
+EVENT_CUSTOMER_NOTE_T
+EVENT_CUSTOMER_NOTE_DATA_T
+EVENT_CUSTOMER_PASSWORD_T
+EVENT_CUSTOMER_STATUSES_T
+EVENT_CUSTOMER_PHONES_T
+EVENT_CUSTOMER_NOTE_T
+EVENT_CUSTOMER_STATUSES_T
+EVENT_CUSTOMER_LOCALE_T
+EVENT_CUSTOMER_LOGIN_T
+EVENT_CUSTOMER_BILLINFO_T
+EVENT_CUSTOMER_PASSWORD_T
+EVENT_CUSTOMER_LOGIN_ALIAS_T
+EVENT_CUSTOMER_ACTGINFO_T
+EVENT_CUSTOMER_NOTE_DATA_T
+EVENT_CUSTOMER_NAMEINFO_T
+S_NQ_DSS_CUSTOM_ATTRS_TMP
+USAGE_INFO_NAI3_T
+EVENT_SESSION_USAGEG3_T
+JOB_TEMPLATE_CUSTOM_INFO_T
+AU_JOB_TEMPLATE_CUSTOM_INFO_T
+
+TABLE_NAME
+_________________________________
+SERVICE_NEXTAIG3_ARGS_T
+AU_SERVICE_NEXTAIG3_ARGS_T
+MLOG$_IAU_CUSTOM
+MLOG$_IAU_CUSTOM_01
+IAU_CUSTOM_01
+IAU_CUSTOM
+S_NQ_DSS_CUSTOM_ATTRS
+S_NQ_DSS_DATASET_CUSTOM
+S_NQ_DSS_DATASET_CUSTOMIZATION
+CONFIG_CUSTOMER_SEGMENT_T
+CUSTOMERATTRIBUTESPEC
+BCCUSTOMANALYZERRULE
+CUSTOMANALYZERRULE_SPEC
+CUSTOMTRIGGEREXPRESSION
+CUSTOMEXPRESSION
+CUSTOMANALYZERRULE
+CUSTOMALTERATIONBASISEXPR
+ABCCUSTOMRULEEXPRESSION
+CUSTOMRULE
+BCCUSTOMERATTRIBUTESPEC
+ACUSTOMRULEEXPRESSION
+CUSTOMERSPECPACKAGEITEM
+CUSTOMALTERATIONTBEXPR
+CONFIG_CUSTOMER_SEGMENT_T
+AU_SERVICE_NEXTAIG3_T
+SERVICE_NEXTAIG3_T
+
+65 rows selected.
+
+SQL> SELECT field_num, field_name FROM dd_fields_t WHERE field_num = 10016;
+
+   FIELD_NUM FIELD_NAME
+____________ _______________
+       10016 PIN_FLD_TEST
+       10016 PIN_FLD_GR1
+
+SQL>
+SQL> SELECT obj_id0, input_tokens, output_tokens, prompt_text
+  2  FROM event_session_usageg3_t
+  3  ORDER BY obj_id0 DESC
+  4* FETCH FIRST 5 ROWS ONLY;
+
+              OBJ_ID0    INPUT_TOKENS    OUTPUT_TOKENS PROMPT_TEXT
+_____________________ _______________ ________________ __________________________
+   364791569817759263              80               30 Summarize this document
+   364791569817758174             500              300 Write a blog post
+   364773977631672911              80               30 Summarize this document
+   363665669910768072            3000             2000 Generate code snippets
+   363665669910767859           35000            15000 Code review request
+
+SQL> SELECT COUNT(*) AS total_rum_map_rows FROM event_rum_map_t;
+
+   TOTAL_RUM_MAP_ROWS
+_____________________
+                    0
+
+SQL> SELECT * FROM event_rum_map_t WHERE obj_id0 = 364791569817759263;
+
+no rows selected
+SQL> SELECT * FROM event_rum_map_t WHERE obj_id0 = 364791569817758174;
+
+no rows selected
+SQL> SELECT obj_id0, impact_category, amount, tax_code FROM event_bal_impacts_t WHERE obj_id0 = 364791569817759263;
+
+no rows selected
+SQL>
