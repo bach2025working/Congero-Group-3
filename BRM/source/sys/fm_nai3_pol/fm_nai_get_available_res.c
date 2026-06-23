@@ -426,20 +426,20 @@ fm_nai_get_available_res(
                                 granted_bal = (pin_decimal_t *)PIN_FLIST_FLD_GET(
                                         sub_bal_flist, PIN_FLD_GRANTED_BAL, 1, ebufp);
                 
-                                rollover_bal = (pin_decimal_t *)PIN_FLIST_FLD_GET(
+                                rollover_data = (int32 *)PIN_FLIST_FLD_GET(
                                         sub_bal_flist, PIN_FLD_ROLLOVER_DATA, 1, ebufp);
                 
                                 out_bal = PIN_FLIST_ELEM_ADD(
                                         *r_flistpp, PIN_FLD_BALANCES, curr, ebufp);
                 
                                 PIN_FLIST_FLD_SET(out_bal, PIN_FLD_RESOURCE_ID,
-                                        &resource_id, ebufp);
+                                        &resource_id_val, ebufp);
                 
-                                if (current_bal != NULL) {
-                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_RESOURCE_ID,
-                                                &resource_id_val, ebufp);
+                                if (rollover_data != NULL) {
+                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_ROLLOVER_DATA,
+                                                rollover_data, ebufp);
                                 }
-                
+                                                
                                 if (granted_bal != NULL) {
                                         PIN_FLIST_FLD_SET(out_bal, PIN_FLD_GRANTED_BAL,
                                                 granted_bal, ebufp);
