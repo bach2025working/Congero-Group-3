@@ -312,161 +312,192 @@ fm_nai_get_available_res(
         pin_flist_t             **r_flistpp,
         pin_errbuf_t            *ebufp)
 {
-        /*
-         * Some Notes:
-         *    use PUT for poids that are from PIN_POID_CREATE
-         *    certain functions requires int64, some int32, some needs pointers
-         */
+        pin_flist_t             *bal_in_flistp = NULL;
+        pin_flist_t             *bal_out_flistp = NULL;
+        pin_flist_t             *read_in_flistp = NULL;
+        pin_flist_t             *read_out_flistp = NULL;
 
-        int64 one = 1;
-        int64 neg_one = -1;
-        int64 zero = 0;
+        poid_t                  *bal_grp_poidp = NULL;
+        poid_t                  *out_poidp = NULL;
+
+        int32                   bal_elemid = 0;
+        int32                   sub_elemid = 0;
+        int32                   resource_id_val = 0;
+        int64                   curr = 0;
+
+        pin_cookie_t            bal_cookie = NULL;
+        pin_cookie_t            sub_cookie = NULL;
+
+        pin_flist_t             *balance_flistp = NULL;
+        pin_flist_t             *sub_bal_flistp = NULL;
+        pin_flist_t             *out_bal_flistp = NULL;
+
+        pin_decimal_t           *current_balp = NULL;
+        pin_decimal_t           *granted_balp = NULL;
+        int32                   *rollover_datap = NULL;
 
         if (PIN_ERR_IS_ERR(ebufp)) {
-                PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_ERROR, "ERROR BUFFER NOT EMPTY IN BAL FUNCTION");
                 return;
         }
         PIN_ERR_CLEAR_ERR(ebufp);
 
-        int64 db = PIN_POID_GET_DB(a_pdp);
-
-        pin_flist_t * cust_flist = PIN_FLIST_CREATE(ebufp);
-        poid_t * pdp = NULL;
-
-        // 0 PIN_FLD_POID POID [0] 0.0.0.1 /plan ACCOUNT_NUM 0
-        PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_POID, (void *)account_obj, ebufp);
-
-        // BALANCES
-        // 0 PIN_FLD_BALANCES ARRAY [0]
-        pin_flist_t * balances = PIN_FLIST_ELEM_ADD(cust_flist, PIN_FLD_BALANCES, 0, ebufp);
-
-        // 1 PIN_FLD_THRESHOLDS ARRAY [0]
-        pin_flist_t * thresholds = PIN_FLIST_ELEM_ADD(balances, PIN_FLD_THRESHOLDS, 0, ebufp);
-
-        // 2 PIN_FLD_THRESHOLD INT [0] 0
-        PIN_FLIST_FLD_SET(thresholds, PIN_FLD_THRESHOLD, &zero, ebufp);
-        
-        // 2 PIN_FLD_AMOUNT DECIMAL [0] NULL
-        PIN_FLIST_FLD_SET(thresholds, PIN_FLD_AMOUNT, NULL, ebufp);
-        
-        // 1 PIN_FLD_RESOURCE_ID INT [0] NULL
-        PIN_FLIST_FLD_SET(balances, PIN_FLD_RESOURCE_ID, NULL, ebufp);
-
-        pin_flist_t * pcm_return_flist = PIN_FLIST_CREATE(ebufp);
-        PCM_OP(ctxp, PCM_OP_BAL_GET_BALANCES, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
-        PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_ERROR, "NAI3 PCM_OP_BAL_GET_BALANCES output", pcm_return_flist);
-
         *r_flistpp = PIN_FLIST_CREATE(ebufp);
 
         /*
-         * If theres an error, sends error code 1 with the message
-         * else, sends error code 0 and the poid
+         * Step 1: call PCM_OP_BAL_GET_BALANCES with account_obj.
+         * This gives us the /balance_group POID.
          */
+        bal_in_flistp = PIN_FLIST_CREATE(ebufp);
+        PIN_FLIST_FLD_SET(bal_in_flistp, PIN_FLD_POID,
+                (void *)account_obj, ebufp);
+
+        PCM_OP(ctxp, PCM_OP_BAL_GET_BALANCES, flags,
+                bal_in_flistp, &bal_out_flistp, ebufp);
+
+        PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_ERROR,
+                "NAI3 PCM_OP_BAL_GET_BALANCES output", bal_out_flistp);
+
         if (PIN_ERR_IS_ERR(ebufp)) {
-            PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
-                        "op_nai_read error", ebufp);
-            PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR, "fm_nai_get_available_res PCM_OP error", ebufp);
+                PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
+                        "fm_nai_get_available_res PCM_OP_BAL_GET_BALANCES error", ebufp);
 
-            PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE, (void *)"1", ebufp);
-            PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR, (void *)"Issue with PCM_OP_BAL_GET_BALANCES", ebufp);
-        } else {
-            PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG, "PCM_OP_CUST_get_available_res output", pcm_return_flist);
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE,
+                        (void *)"1", ebufp);
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR,
+                        (void *)"Issue with PCM_OP_BAL_GET_BALANCES", ebufp);
 
-            poid_t *cust_poid = PIN_FLIST_FLD_GET(pcm_return_flist, PIN_FLD_POID, 0, ebufp);
-                if (cust_poid != NULL) {
-                    PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_POID, (void *)cust_poid, ebufp);
-            }
-                
-                int32 bal_elemid = 0;
-                int32 sub_elemid = 0;
-                int64 curr = 0;
-                
-                pin_cookie_t bal_cookie = NULL;
-                pin_cookie_t sub_cookie = NULL;
-                
-                pin_flist_t *balance_flist = NULL;
-                pin_flist_t *sub_bal_flist = NULL;
-                pin_flist_t *out_bal = NULL;
-                
-                int32 resource_id_val = 0;
-                pin_decimal_t *current_bal = NULL;
-                pin_decimal_t *granted_bal = NULL;
-                int32 *rollover_data = NULL;
-
-            /*
-             * Walk through the return FLIST and read the balances, use variable curr to keep track of the number of sub-balances
-             */
-                
-                
-                balance_flist = PIN_FLIST_ELEM_GET_NEXT(
-                        pcm_return_flist, PIN_FLD_BALANCES,
-                        &bal_elemid, 1, &bal_cookie, ebufp);
-                
-                while (balance_flist != NULL) {
-                
-                        resource_id_val = bal_elemid;
-                
-                        if (resource_id_val == 840) {
-                                balance_flist = PIN_FLIST_ELEM_GET_NEXT(
-                                        pcm_return_flist, PIN_FLD_BALANCES,
-                                        &bal_elemid, 1, &bal_cookie, ebufp);
-                                continue;
-                        }
-                
-                        sub_cookie = NULL;
-                        sub_bal_flist = PIN_FLIST_ELEM_GET_NEXT(
-                                balance_flist, PIN_FLD_SUB_BALANCES,
-                                &sub_elemid, 1, &sub_cookie, ebufp);
-                
-                        while (sub_bal_flist != NULL) {
-                
-                                current_bal = (pin_decimal_t *)PIN_FLIST_FLD_GET(
-                                        sub_bal_flist, PIN_FLD_CURRENT_BAL, 1, ebufp);
-                
-                                granted_bal = (pin_decimal_t *)PIN_FLIST_FLD_GET(
-                                        sub_bal_flist, PIN_FLD_GRANTED_BAL, 1, ebufp);
-                
-                                rollover_data = (int32 *)PIN_FLIST_FLD_GET(
-                                        sub_bal_flist, PIN_FLD_ROLLOVER_DATA, 1, ebufp);
-                
-                                out_bal = PIN_FLIST_ELEM_ADD(
-                                        *r_flistpp, PIN_FLD_BALANCES, curr, ebufp);
-                
-                                PIN_FLIST_FLD_SET(out_bal, PIN_FLD_RESOURCE_ID,
-                                        &resource_id_val, ebufp);
-                
-                                if (rollover_data != NULL) {
-                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_ROLLOVER_DATA,
-                                                rollover_data, ebufp);
-                                }
-                                
-                                if (current_bal != NULL) {
-                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_CURRENT_BAL,
-                                                current_bal, ebufp);
-                                }
-                                
-                                if (granted_bal != NULL) {
-                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_GRANTED_BAL,
-                                                granted_bal, ebufp);
-                                }
-                
-                                curr++;
-                
-                                sub_bal_flist = PIN_FLIST_ELEM_GET_NEXT(
-                                        balance_flist, PIN_FLD_SUB_BALANCES,
-                                        &sub_elemid, 1, &sub_cookie, ebufp);
-                        }
-                
-                        balance_flist = PIN_FLIST_ELEM_GET_NEXT(
-                                pcm_return_flist, PIN_FLD_BALANCES,
-                                &bal_elemid, 1, &bal_cookie, ebufp);
-                }
-            PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE, (void *) "0", ebufp);
-            PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR, (void *) "Resources obtained successfully", ebufp);
-
+                goto cleanup;
         }
 
-        PIN_FLIST_DESTROY_EX(&cust_flist, NULL);
-        PIN_FLIST_DESTROY_EX(&pcm_return_flist, NULL);
+        bal_grp_poidp = PIN_FLIST_FLD_GET(bal_out_flistp,
+                PIN_FLD_POID, 0, ebufp);
+
+        if (bal_grp_poidp == NULL) {
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE,
+                        (void *)"1", ebufp);
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR,
+                        (void *)"No balance group found", ebufp);
+
+                goto cleanup;
+        }
+
+        /*
+         * Step 2: read the /balance_group directly.
+         * This exposes PIN_FLD_BALANCES and PIN_FLD_SUB_BALANCES.
+         */
+        read_in_flistp = PIN_FLIST_CREATE(ebufp);
+        PIN_FLIST_FLD_SET(read_in_flistp, PIN_FLD_POID,
+                (void *)bal_grp_poidp, ebufp);
+
+        PCM_OP(ctxp, PCM_OP_READ_OBJ, flags,
+                read_in_flistp, &read_out_flistp, ebufp);
+
+        PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_ERROR,
+                "NAI3 BALANCE_GROUP READ_OBJ output", read_out_flistp);
+
+        if (PIN_ERR_IS_ERR(ebufp)) {
+                PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
+                        "fm_nai_get_available_res PCM_OP_READ_OBJ error", ebufp);
+
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE,
+                        (void *)"1", ebufp);
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR,
+                        (void *)"Issue with PCM_OP_READ_OBJ balance group", ebufp);
+
+                goto cleanup;
+        }
+
+        out_poidp = PIN_FLIST_FLD_GET(read_out_flistp,
+                PIN_FLD_POID, 0, ebufp);
+
+        if (out_poidp != NULL) {
+                PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_POID,
+                        (void *)out_poidp, ebufp);
+        }
+
+        /*
+         * Step 3: return only non-currency resources.
+         * Resource 840 is USD, so skip it.
+         */
+        bal_cookie = NULL;
+        balance_flistp = PIN_FLIST_ELEM_GET_NEXT(
+                read_out_flistp, PIN_FLD_BALANCES,
+                &bal_elemid, 1, &bal_cookie, ebufp);
+
+        while (balance_flistp != NULL) {
+
+                resource_id_val = bal_elemid;
+
+                if (resource_id_val != 840) {
+
+                        sub_cookie = NULL;
+                        sub_bal_flistp = PIN_FLIST_ELEM_GET_NEXT(
+                                balance_flistp, PIN_FLD_SUB_BALANCES,
+                                &sub_elemid, 1, &sub_cookie, ebufp);
+
+                        while (sub_bal_flistp != NULL) {
+
+                                current_balp = PIN_FLIST_FLD_GET(
+                                        sub_bal_flistp, PIN_FLD_CURRENT_BAL,
+                                        1, ebufp);
+
+                                granted_balp = PIN_FLIST_FLD_GET(
+                                        sub_bal_flistp, PIN_FLD_GRANTED_BAL,
+                                        1, ebufp);
+
+                                rollover_datap = PIN_FLIST_FLD_GET(
+                                        sub_bal_flistp, PIN_FLD_ROLLOVER_DATA,
+                                        1, ebufp);
+
+                                out_bal_flistp = PIN_FLIST_ELEM_ADD(
+                                        *r_flistpp, PIN_FLD_BALANCES,
+                                        curr, ebufp);
+
+                                PIN_FLIST_FLD_SET(out_bal_flistp,
+                                        PIN_FLD_RESOURCE_ID,
+                                        &resource_id_val, ebufp);
+
+                                if (current_balp != NULL) {
+                                        PIN_FLIST_FLD_SET(out_bal_flistp,
+                                                PIN_FLD_CURRENT_BAL,
+                                                current_balp, ebufp);
+                                }
+
+                                if (granted_balp != NULL) {
+                                        PIN_FLIST_FLD_SET(out_bal_flistp,
+                                                PIN_FLD_GRANTED_BAL,
+                                                granted_balp, ebufp);
+                                }
+
+                                if (rollover_datap != NULL) {
+                                        PIN_FLIST_FLD_SET(out_bal_flistp,
+                                                PIN_FLD_ROLLOVER_DATA,
+                                                rollover_datap, ebufp);
+                                }
+
+                                curr++;
+
+                                sub_bal_flistp = PIN_FLIST_ELEM_GET_NEXT(
+                                        balance_flistp, PIN_FLD_SUB_BALANCES,
+                                        &sub_elemid, 1, &sub_cookie, ebufp);
+                        }
+                }
+
+                balance_flistp = PIN_FLIST_ELEM_GET_NEXT(
+                        read_out_flistp, PIN_FLD_BALANCES,
+                        &bal_elemid, 1, &bal_cookie, ebufp);
+        }
+
+        PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_CODE,
+                (void *)"0", ebufp);
+        PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_ERROR_DESCR,
+                (void *)"Resources obtained successfully", ebufp);
+
+cleanup:
+        PIN_FLIST_DESTROY_EX(&bal_in_flistp, NULL);
+        PIN_FLIST_DESTROY_EX(&bal_out_flistp, NULL);
+        PIN_FLIST_DESTROY_EX(&read_in_flistp, NULL);
+        PIN_FLIST_DESTROY_EX(&read_out_flistp, NULL);
+
         return;
 }
