@@ -71,6 +71,7 @@ fm_nai_act_rate(
         int32                   flags,
         poid_t                  *a_pdp,
         poid_t                  *account_obj,
+        poid_t                  *service_poid,
         char                    *date,
         char                    *descr,
         int32                   *model_code,
@@ -200,7 +201,7 @@ op_nai_act_rate(
         /*
          * Calling our act_rate
          */ 
-        fm_nai_act_rate(ctxp, flags, a_pdp, account_obj, date, descr, model_code, trans_id, prompt_txt, tokens_in, tokens_out, r_flistpp, ebufp);
+        fm_nai_act_rate(ctxp, flags, a_pdp, account_obj, service_poid, date, descr, model_code, trans_id, prompt_txt, tokens_in, tokens_out, r_flistpp, ebufp);
 
         /***********************************************************
          * Error?
@@ -366,6 +367,7 @@ fm_nai_act_rate(
         int32                   flags,
         poid_t                  *a_pdp,
         poid_t                  *account_obj,
+        poid_t                  *service_poid,
         char                    *date,
         char                    *descr,
         int32                   *model_code,
@@ -413,6 +415,9 @@ fm_nai_act_rate(
 
         // 0 PIN_FLD_POID POID [0] 0.0.0.1 /plan ACCOUNT_NUM 0
         PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_POID, (void *)account_obj, ebufp);
+
+        // 0 PIN_FLD_SERVICE_OBJ POID [0] 0.0.0.1 /service/nextaig3 ACCOUNT_NUM 0
+        PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_SERVICE_OBJ, (void *)service_poid, ebufp);
 
         // 0 PIN_FLD_OBJ_TYPE STR [0] "/usageg3"
         PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_OBJ_TYPE, (void *) "/usageg3", ebufp);
