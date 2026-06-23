@@ -376,20 +376,6 @@ fm_nai_get_available_res(
                     PIN_FLIST_FLD_SET(*r_flistpp, PIN_FLD_POID, (void *)cust_poid, ebufp);
             }
                 
-            int32 *resource_id = NULL;
-            pin_decimal_t * current_bal = NULL;
-            pin_decimal_t * granted_bal = NULL;
-            pin_flist_t * balance_flist = NULL;
-
-            pin_cookie_t cookie = NULL;
-
-            int32 element_id = 0;
-            int64 curr = 0;
-            pin_flist_t * usd = NULL;
-
-            /*
-             * Walk through the return FLIST and read the balances, use variable curr to keep track of the number of sub-balances
-             */
                 int32 bal_elemid = 0;
                 int32 sub_elemid = 0;
                 int64 curr = 0;
@@ -405,6 +391,12 @@ fm_nai_get_available_res(
                 pin_decimal_t *current_bal = NULL;
                 pin_decimal_t *granted_bal = NULL;
                 pin_decimal_t *rollover_bal = NULL;
+                pin_flist_t * usd = NULL;
+
+            /*
+             * Walk through the return FLIST and read the balances, use variable curr to keep track of the number of sub-balances
+             */
+                
                 
                 balance_flist = PIN_FLIST_ELEM_GET_NEXT(
                         pcm_return_flist, PIN_FLD_BALANCES,
