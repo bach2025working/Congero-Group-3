@@ -354,6 +354,7 @@ fm_nai_get_available_res(
 
         pin_flist_t * pcm_return_flist = PIN_FLIST_CREATE(ebufp);
         PCM_OP(ctxp, PCM_OP_BAL_GET_BALANCES, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
+        PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_ERROR, "NAI3 PCM_OP_BAL_GET_BALANCES output", pcm_return_flist);
 
         *r_flistpp = PIN_FLIST_CREATE(ebufp);
 
@@ -387,11 +388,10 @@ fm_nai_get_available_res(
                 pin_flist_t *sub_bal_flist = NULL;
                 pin_flist_t *out_bal = NULL;
                 
-                int32 resource_id = 0;
+                int32 resource_id_val = 0;
                 pin_decimal_t *current_bal = NULL;
                 pin_decimal_t *granted_bal = NULL;
-                pin_decimal_t *rollover_bal = NULL;
-                pin_flist_t * usd = NULL;
+                int32 *rollover_data = NULL;
 
             /*
              * Walk through the return FLIST and read the balances, use variable curr to keep track of the number of sub-balances
@@ -404,10 +404,9 @@ fm_nai_get_available_res(
                 
                 while (balance_flist != NULL) {
                 
-                        resource_id = bal_elemid;
+                        resource_id_val = bal_elemid;
                 
-                        /* Skip currency resource. Return only free resources. */
-                        if (resource_id == 840) {
+                        if (resource_id_val == 840) {
                                 balance_flist = PIN_FLIST_ELEM_GET_NEXT(
                                         pcm_return_flist, PIN_FLD_BALANCES,
                                         &bal_elemid, 1, &bal_cookie, ebufp);
@@ -437,8 +436,8 @@ fm_nai_get_available_res(
                                         &resource_id, ebufp);
                 
                                 if (current_bal != NULL) {
-                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_CURRENT_BAL,
-                                                current_bal, ebufp);
+                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_RESOURCE_ID,
+                                                &resource_id_val, ebufp);
                                 }
                 
                                 if (granted_bal != NULL) {
