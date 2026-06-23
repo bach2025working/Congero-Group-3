@@ -436,6 +436,19 @@ fm_nai_act_rate(
         // 0 PIN_FLD_DESCR STR [0] "MYDESCR"
         PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_DESCR, (void *)descr, ebufp);
 
+        /*
+         * Calculate token blocks
+         * (100000 + 200000) / 1000 = 300
+         */
+        int64 total_tokens = *tokens_in + *tokens_out;
+        
+        char qty_str[64];
+        sprintf(qty_str, "%lld", (long long)(total_tokens / 1000));
+        
+        pin_decimal_t *qty = pbo_decimal_from_str(qty_str, ebufp);
+        
+        PIN_FLIST_FLD_PUT(cust_flist, PIN_FLD_QUANTITY, qty, ebufp);
+
         // 1     PIN_FLD_INFO_NAI3 SUBSTRUCT [0]
         pin_flist_t *nextaig3 = PIN_FLIST_SUBSTR_ADD(cust_flist, PIN_FLD_INFO_NAI3, ebufp);
 
