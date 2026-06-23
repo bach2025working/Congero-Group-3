@@ -77,8 +77,8 @@ fm_nai_act_rate(
         int32                   *model_code,
         pin_decimal_t           *trans_id,
         char                    *prompt_txt,
-        int64                   *tokens_in,
-        int64                   *tokens_out,
+        int32                   *tokens_in,
+        int32                   *tokens_out,
         pin_flist_t             **r_flistpp,
         pin_errbuf_t            *ebufp);
 
@@ -148,8 +148,8 @@ op_nai_act_rate(
         int32 *model_code = (int32 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_MODELTYPE_NAI3, 0, ebufp);
         pin_decimal_t *trans_id = (pin_decimal_t *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_TRANSACTION_ID, 0, ebufp);
         char * prompt_txt = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_PROMPT_NAI3, 0, ebufp);
-        int64 * tokens_in = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_INPUT_TOKENS_NAI3, 0, ebufp);
-        int64 * tokens_out = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_OUTPUT_TOKENS_NAI3, 0, ebufp);
+        int32 * tokens_in = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_INPUT_TOKENS_NAI3, 0, ebufp);
+        int32 * tokens_out = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_OUTPUT_TOKENS_NAI3, 0, ebufp);
 
         /*
          * service_flist will hold the PIN_FLD_RESULTS 
@@ -373,8 +373,8 @@ fm_nai_act_rate(
         int32                   *model_code,
         pin_decimal_t           *trans_id,
         char                    *prompt_txt,
-        int64                   *tokens_in,
-        int64                   *tokens_out,
+        int32                   *tokens_in,
+        int32                   *tokens_out,
         pin_flist_t             **r_flistpp,
         pin_errbuf_t            *ebufp)
 {
@@ -440,10 +440,10 @@ fm_nai_act_rate(
          * Calculate token blocks
          * (100000 + 200000) / 1000 = 300
          */
-        int64 total_tokens = *tokens_in + *tokens_out;
-        
+        int32 total_tokens = *tokens_in + *tokens_out;
+
         char qty_str[64];
-        sprintf(qty_str, "%lld", (long long)(total_tokens / 1000));
+        sprintf(qty_str, "%d", total_tokens / 1000);
         
         pin_decimal_t *qty = pbo_decimal_from_str(qty_str, ebufp);
         
