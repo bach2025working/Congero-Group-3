@@ -439,15 +439,15 @@ fm_nai_get_available_res(
                                         PIN_FLIST_FLD_SET(out_bal, PIN_FLD_ROLLOVER_DATA,
                                                 rollover_data, ebufp);
                                 }
-                                                
+                                
+                                if (current_bal != NULL) {
+                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_CURRENT_BAL,
+                                                current_bal, ebufp);
+                                }
+                                
                                 if (granted_bal != NULL) {
                                         PIN_FLIST_FLD_SET(out_bal, PIN_FLD_GRANTED_BAL,
                                                 granted_bal, ebufp);
-                                }
-                
-                                if (rollover_bal != NULL) {
-                                        PIN_FLIST_FLD_SET(out_bal, PIN_FLD_ROLLOVER_DATA,
-                                                rollover_bal, ebufp);
                                 }
                 
                                 curr++;
