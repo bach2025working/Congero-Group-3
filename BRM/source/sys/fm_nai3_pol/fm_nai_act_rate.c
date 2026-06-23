@@ -448,9 +448,12 @@ fm_nai_act_rate(
         pin_decimal_t *qty = pbo_decimal_from_str(qty_str, ebufp);
         
         PIN_FLIST_FLD_PUT(cust_flist, PIN_FLD_QUANTITY, qty, ebufp);
-
-        // 1     PIN_FLD_INFO_NAI3 SUBSTRUCT [0]
-        pin_flist_t *nextaig3 = PIN_FLIST_SUBSTR_ADD(cust_flist, PIN_FLD_INFO_NAI3, ebufp);
+        
+        // 0 PIN_FLD_INHERITED_INFO SUBSTRUCT [0]
+        pin_flist_t *inherited_info = PIN_FLIST_SUBSTR_ADD(cust_flist, PIN_FLD_INHERITED_INFO, ebufp);
+        
+        // 1 PIN_FLD_INFO_NAI3 SUBSTRUCT [0]
+        pin_flist_t *nextaig3 = PIN_FLIST_SUBSTR_ADD(inherited_info, PIN_FLD_INFO_NAI3, ebufp);
 
         // 2         PIN_FLD_MODELTYPE_NAI3 STR [0] "3.0 or 3.5"
         PIN_FLIST_FLD_SET(nextaig3, PIN_FLD_MODELTYPE_NAI3, (void *)model_code, ebufp);
