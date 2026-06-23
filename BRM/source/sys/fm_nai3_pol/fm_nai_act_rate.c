@@ -458,6 +458,7 @@ fm_nai_act_rate(
         PIN_FLIST_FLD_SET(nextaig3, PIN_FLD_OUTPUT_TOKENS_NAI3, (void *)tokens_out, ebufp);
 
         pin_flist_t * pcm_return_flist = PIN_FLIST_CREATE(ebufp);
+        PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_ERROR, "NAI3 ACT_LOAD_SESSION INPUT", cust_flist);
         PCM_OP(ctxp, PCM_OP_ACT_LOAD_SESSION, flags, cust_flist, &pcm_return_flist, ebufp); //dont use r_flistpp
 
         *r_flistpp = PIN_FLIST_CREATE(ebufp);
