@@ -144,8 +144,8 @@ op_nai_act_rate(
         // date will hold the actual date time in the format month-date-year and convert to epoch time
         char * date = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_NAME, 0, ebufp);
         char * descr = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_DESCR, 0, ebufp);
-        char * model_code = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_MODELTYPE_NAI3, 0, ebufp);
-        char * trans_id = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_TRANSACTION_ID, 0, ebufp);
+        int32 *model_code = (int32 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_MODELTYPE_NAI3, 0, ebufp);
+        pin_decimal_t *trans_id = (pin_decimal_t *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_TRANSACTION_ID, 0, ebufp);
         char * prompt_txt = (char *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_PROMPT_NAI3, 0, ebufp);
         int64 * tokens_in = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_INPUT_TOKENS_NAI3, 0, ebufp);
         int64 * tokens_out = (int64 *)PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_OUTPUT_TOKENS_NAI3, 0, ebufp);
@@ -154,8 +154,8 @@ op_nai_act_rate(
          * service_flist will hold the PIN_FLD_RESULTS 
          * and service_poid will hold the poid of the service (via TAKE)
          */ 
-        void * service_poid = NULL;
-        void * account_obj = NULL;
+        poid_t *service_poid = NULL;
+        poid_t *account_obj = NULL;
         pin_flist_t * service_flist = NULL;
         search_login(ctxp, flags, a_pdp, login, &service_flist, &service_poid, &account_obj, ebufp);
 
