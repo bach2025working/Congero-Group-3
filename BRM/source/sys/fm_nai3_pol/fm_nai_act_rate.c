@@ -416,7 +416,7 @@ fm_nai_act_rate(
         // 0 PIN_FLD_POID POID [0] 0.0.0.1 /plan ACCOUNT_NUM 0
         PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_POID, (void *)account_obj, ebufp);
 
-        // 0 PIN_FLD_SERVICE_OBJ POID [0] 0.0.0.1 /service/nextaig3 ACCOUNT_NUM 0
+        // 0 PIN_FLD_SERVICE_OBJ POID [0] 0.0.0.1 /service/nextaig3 SERVICE_ID 0
         PIN_FLIST_FLD_SET(cust_flist, PIN_FLD_SERVICE_OBJ, (void *)service_poid, ebufp);
 
         // 0 PIN_FLD_OBJ_TYPE STR [0] "/usageg3"
