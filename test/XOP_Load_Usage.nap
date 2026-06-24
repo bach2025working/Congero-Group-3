@@ -1,0 +1,17 @@
+r << END 1
+0 PIN_FLD_POID                 POID [0] 0.0.0.1 /event/session/usageg3 -1 0
+0 PIN_FLD_ACCOUNT_OBJ          POID [0] 0.0.0.1 /account 1114869 0
+0 PIN_FLD_LOGIN                 STR [0] "kevin8@nai3.test"
+0 PIN_FLD_NAME                  STR [0] "10-16-2026"
+0 PIN_FLD_DESCR                 STR [0] "NAI3 Test 01 token usage"
+0 PIN_FLD_MODELTYPE_NAI3       ENUM [0] 35
+0 PIN_FLD_TRANSACTION_ID    DECIMAL [0] 30303030
+0 PIN_FLD_PROMPT_NAI3           STR [0] "NAI3 Test 01 token usage"
+0 PIN_FLD_INPUT_TOKENS_NAI3     INT [0] 100000
+0 PIN_FLD_OUTPUT_TOKENS_NAI3    INT [0] 200000
+END
+
+xop 280217 0 1
+
+# MUST READ -.-
+# Change the Acc#, Login, Date, and Increment Trans ID by 1!
