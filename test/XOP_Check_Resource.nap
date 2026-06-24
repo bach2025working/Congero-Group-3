@@ -1,0 +1,10 @@
+r << END 1
+0 PIN_FLD_POID                 POID [0] 0.0.0.1 /event/session/usageg3 -1 0
+0 PIN_FLD_ACCOUNT_OBJ POID [0] 0.0.0.1 /account 1114869 0
+0 PIN_FLD_LOGIN STR [0] "kevin8@nai3.test"
+END
+
+xop 280216 0 1
+
+# MUST READ!!! -.-
+# Change Login
