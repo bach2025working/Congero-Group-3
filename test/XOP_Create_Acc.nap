@@ -1,0 +1,45 @@
+r << END 1
+0 PIN_FLD_POID           POID [0] 0.0.0.1 /dummy -1 0
+0 PIN_FLD_ACCOUNT_OBJ    POID [0] 0.0.0.1 /account -1 0
+0 PIN_FLD_LOGIN          STR [0] "NAI3_Test_04"
+0 PIN_FLD_PASSWD_CLEAR   STR [0] "MBLVK@Summer2026!"
+0 PIN_FLD_CODE           STR [0] "NAI-G3-O3.5-Plan Oddisey 3.5 monthly fee with included extra T"
+0 PIN_FLD_FIRST_NAME     STR [0] "NAI3 Test 3"
+0 PIN_FLD_LAST_NAME      STR [0] "Summer 2026"
+0 PIN_FLD_EMAIL_ADDR     STR [0] "Test4@Nai3.commit"
+0 PIN_FLD_COUNTRY        STR [0] "US"
+0 PIN_FLD_ZIP            STR [0] "12345"
+0 PIN_FLD_STATE          STR [0] "CA"
+0 PIN_FLD_CITY           STR [0] "San Diego"
+0 PIN_FLD_ADDRESS        STR [0] "2026 @Nai3"
+0 PIN_FLD_NAME           STR [0] "InvoiceNai3"
+0 PIN_FLD_DELIVERY_DESCR STR [0] "Email"
+END
+
+d 1
+xop 280218 0 1
+
+# MUST READ !!! -.-
+# Increment the Login, First Name, Email, and Change Plan_Code Before use
+
+#=========Plan_Code=========
+#
+# Odyssey 3.0 Prompt Plans
+#       NAI-G3-O3-PAYG-Prompt-Plan
+#       NAI-G3-O3-Monthly-100-Prompt-Plan
+#       NAI-G3-O3-Unlimited-Prompt-Plan
+#
+# Odyssey 3.0 Token Plans
+#       NAI-G3-O3-PAYG-Token-Plan
+#       NAI-G3-O3-Monthly-200k-Token-Plan
+#       NAI-G3-O3-Monthly-2500k-Token-Plan
+#
+# Odyssey 3.5 Prompt Plans
+#       NAI-G3-O3.5-Plan Oddisey 3.5 pay as you go
+#       NAI-G3-O3.5-Plan Oddisey 3.5 monthly fee with included
+#       NAI-G3-O3.5-Plan Oddisey 3.5 monthly fee unlimited
+#
+# Odyssey 3.5 Token Plans
+#       NAI-G3-O3.5-Plan Oddisey 3.5 pay as you go T
+#       NAI-G3-O3.5-Plan Oddisey 3.5 monthly fee with included T
+#       NAI-G3-O3.5-Plan Oddisey 3.5 monthly fee with included extra T
